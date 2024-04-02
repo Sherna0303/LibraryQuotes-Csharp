@@ -6,6 +6,6 @@ namespace LibraryQuotes.Services
     public interface IQuotesService
     {
         Copy CalculatePrice(CopyDTO payload);
-        ListCopies CalculatePriceListCopies(List<CopyDTO> payload);
+        ListCopies CalculatePriceListCopies(ClientDTO payload);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using LibraryQuotes.Models.DTOS;
 using LibraryQuotes.Models.Entities;
 using LibraryQuotes.Models.Factories;
-using System.ComponentModel.DataAnnotations;
 
 namespace LibraryQuotes.Services
 {
@@ -23,14 +22,15 @@ namespace LibraryQuotes.Services
             return copy;
         }
 
-        public ListCopies CalculatePriceListCopies(List<CopyDTO> payload)
+        public ListCopies CalculatePriceListCopies(ClientDTO payload)
         {
-            var copies = payload.Select(item => _copyFactory.Create(item)).OrderByDescending(x => x.Price).ToList();
+            var copies = payload.Copies.Select(item => _copyFactory.Create(item)).ToList();
 
             float total = 0;
             float discount = 0;
-            float RETAIL_INCREASE = ValidateIncreaseRetailPurchase(payload.Count);
-            float WHOLESALE_DISCOUNT = ValidateWholesaleDiscount(payload.Count);
+            float RETAIL_INCREASE = ValidateIncreaseRetailPurchase(copies.Count);
+            float WHOLESALE_DISCOUNT = ValidateWholesaleDiscount(copies.Count);
+            float ANTIQUITY_DISCOUNT = ValidateAntiquityDiscount(payload.AntiquityYears);
 
             for (int i = 0; i < copies.Count; i++)
             {
@@ -39,12 +39,15 @@ namespace LibraryQuotes.Services
 
                 if (i >= 10)
                 {
-                    discount += copyPrice * (1 - WHOLESALE_DISCOUNT);
+
+                    discount += copyPrice * WHOLESALE_DISCOUNT;
                 }
             }
+
+            discount += total * ANTIQUITY_DISCOUNT;
             total -= discount;
 
-            return new ListCopies(copies, total, discount);
+            return new ListCopies(payload.AntiquityYears, copies, total, discount);
         }
 
         private float ValidateIncreaseRetailPurchase(int count)
@@ -57,7 +60,26 @@ namespace LibraryQuotes.Services
         private float ValidateWholesaleDiscount(int count)
         {
             const float WHOLESALE_DISCOUNT = 0.15f;
-            return 1 - (count * WHOLESALE_DISCOUNT / 100);
+            return count * WHOLESALE_DISCOUNT / 100;
+        }
+
+        private float ValidateAntiquityDiscount(int years)
+        {
+            float DISCOUNT;
+            if (years <= 0)
+            {
+                DISCOUNT = 0;
+            }
+            else if (years >= 1 && years <= 2)
+            {
+                DISCOUNT = 0.12f;
+            }
+            else
+            {
+                DISCOUNT = 0.17f;
+            }
+
+            return DISCOUNT;
         }
     }
 }
