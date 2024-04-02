@@ -17,9 +17,8 @@ namespace LibraryQuotes.Services
         public Copy CalculatePrice(CopyDTO payload)
         {
             float RETAIL_INCREASE = 1;
-            float WHOLESALE_DISCOUNT = 1;
             var copy = _copyFactory.Create(payload);
-            copy.CalculateIncrease(RETAIL_INCREASE, WHOLESALE_DISCOUNT);
+            copy.CalculateIncrease(RETAIL_INCREASE);
 
             return copy;
         }
@@ -35,9 +34,15 @@ namespace LibraryQuotes.Services
 
             for (int i = 0; i < copies.Count; i++)
             {
-                total += (i >= 10) ? copies[i].CalculateIncrease(RETAIL_INCREASE, WHOLESALE_DISCOUNT) : copies[i].CalculateIncrease(RETAIL_INCREASE, 1);
-            }
+                float copyPrice = copies[i].CalculateIncrease(RETAIL_INCREASE);
+                total += copyPrice;
 
+                if (i >= 10)
+                {
+                    discount += copyPrice * (1 - WHOLESALE_DISCOUNT);
+                }
+            }
+            total -= discount;
 
             return new ListCopies(copies, total, discount);
         }

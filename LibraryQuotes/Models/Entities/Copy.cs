@@ -19,6 +19,6 @@
             Price = price;
         }
 
-        public abstract float CalculateIncrease(float RETAIL_INCREASE, float WHOLESALE_DISCOUNT);
+        public abstract float CalculateIncrease(float RETAIL_INCREASE);
     }
 }
