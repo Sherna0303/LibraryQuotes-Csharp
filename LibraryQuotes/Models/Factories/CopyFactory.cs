@@ -10,8 +10,8 @@ namespace LibraryQuotes.Models.Factories
         {
             var copyChildren = new Dictionary<CopyType, Copy>
             {
-                { CopyType.BOOK, new Book(payload.Name, payload.Author, payload.Price) },
-                { CopyType.NOVEL, new Novel(payload.Name, payload.Author, payload.Price) },
+                { CopyType.BOOK, new Book(payload.Name, payload.Author, payload.Price, 0) },
+                { CopyType.NOVEL, new Novel(payload.Name, payload.Author, payload.Price, 0) },
             };
 
             var copy = copyChildren.GetValueOrDefault(payload.Type);

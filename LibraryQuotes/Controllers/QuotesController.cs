@@ -8,23 +8,25 @@ namespace LibraryQuotes.Controllers
     [Route("/api")]
     public class QuotesController : ControllerBase
     {
-        private readonly IQuotesService _quotesService;
+        private readonly IQuotationService _quotationService;
+        private readonly IQuoteListService _quoteListService;
 
-        public QuotesController(IQuotesService quotesService)
+        public QuotesController(IQuotationService quotationService, IQuoteListService quoteListService)
         {
-            _quotesService = quotesService;
+            _quotationService = quotationService;
+            _quoteListService = quoteListService;
         }
 
         [HttpPost("/calculateCopyPrice")]
-        public async Task<IActionResult> CalculateCopyPrice(CopyDTO payload)
+        public async Task<IActionResult> CalculateCopyPrice(ClientDTO payload)
         {
-            return StatusCode(StatusCodes.Status200OK, _quotesService.CalculatePrice(payload));
+            return StatusCode(StatusCodes.Status200OK, _quotationService.CalculatePrice(payload));
         }
 
         [HttpPost("/calculateListCopyPrice")]
         public async Task<IActionResult> CalculateListCopyPrice(ClientDTO payload)
         {
-            return StatusCode(StatusCodes.Status200OK, _quotesService.CalculatePriceListCopies(payload));
+            return StatusCode(StatusCodes.Status200OK, _quoteListService.CalculatePriceListCopies(payload));
         }
     }
 }
