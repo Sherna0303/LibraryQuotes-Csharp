@@ -16,9 +16,15 @@ namespace LibraryQuotes.Controllers
         }
 
         [HttpPost("/calculateCopyPrice")]
-        public async Task<IActionResult> calculateCopyPrice(CopyDTO payload)
+        public async Task<IActionResult> CalculateCopyPrice(CopyDTO payload)
         {
             return StatusCode(StatusCodes.Status200OK, _quotesService.CalculatePrice(payload));
+        }
+
+        [HttpPost("/calculateListCopyPrice")]
+        public async Task<IActionResult> CalculateListCopyPrice(List<CopyDTO> payload)
+        {
+            return StatusCode(StatusCodes.Status200OK, _quotesService.CalculatePriceListCopies(payload));
         }
     }
 }
