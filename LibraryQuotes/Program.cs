@@ -8,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddSingleton<ICopyFactory, CopyFactory>();
-builder.Services.AddTransient<IQuotesService, QuotesService>();
+builder.Services.AddTransient<IQuotationService, QuotationService>();
+builder.Services.AddTransient<IQuoteListService, QuoteListService>();
 
 var app = builder.Build();
 
