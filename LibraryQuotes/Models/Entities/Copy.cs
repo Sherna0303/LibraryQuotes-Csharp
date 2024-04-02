@@ -7,7 +7,6 @@
         public float Price { get; set; }
         public float TotalPrice { get; set; }
         protected float INCREASE_PRICE = 0;
-        protected double DISCOUNT = 0;
 
         protected Copy()
         {
@@ -20,6 +19,6 @@
             Price = price;
         }
 
-        public abstract float CalculateIncrease();
+        public abstract float CalculateIncrease(float RETAIL_INCREASE);
     }
 }

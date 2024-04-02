@@ -2,9 +2,9 @@
 {
     public class ListCopies
     {
-        public List<Copy> copies {  get; set; }
         public float Total { get; set; }
         public float TotalDiscount { get; set; }
+        public List<Copy> Copies { get; set; }
 
         public ListCopies()
         {
@@ -12,7 +12,7 @@
 
         public ListCopies(List<Copy> copies, float total, float totalDiscount)
         {
-            this.copies = copies;
+            Copies = copies;
             Total = total;
             TotalDiscount = totalDiscount;
         }
