@@ -11,9 +11,9 @@
             INCREASE_PRICE = 2;
         }
 
-        public override float CalculateIncrease()
+        public override float CalculateIncrease(float RETAIL_INCREASE, float WHOLESALE_DISCOUNT)
         {
-            TotalPrice = Price * INCREASE_PRICE;
+            TotalPrice = Price * INCREASE_PRICE * RETAIL_INCREASE * WHOLESALE_DISCOUNT;
             return TotalPrice;
         }
     }
