@@ -19,5 +19,20 @@ namespace LibraryQuotes.Services
             copy.CalculateIncrease();
             return copy;
         }
+
+        public ListCopies CalculatePriceListCopies(List<CopyDTO> payload)
+        {
+            var copies = payload.Select(item => _copyFactory.Create(item)).ToList();
+
+            float total = 0;
+            float discount = 0;
+
+            foreach (var copy in copies)
+            {
+                total += copy.CalculateIncrease();
+            }
+
+            return new ListCopies(copies, total, discount);
+        }
     }
 }
