@@ -22,7 +22,45 @@
         }
 
         public abstract float CalculateIncrease(float RETAIL_INCREASE);
-        public abstract float CalculateDiscount(int AntiquityYears);
-        public abstract float CalculateWholesaleDiscount(int count);
+
+        public float CalculateDiscount(int AntiquityYears)
+        {
+            float DISCOUNT_ANTIQUITY = ValidateAntiquityDiscount(AntiquityYears);
+            Discount += Price * DISCOUNT_ANTIQUITY;
+            TotalPrice = Price - Discount;
+            return Discount;
+        }
+
+        public float CalculateWholesaleDiscount(int count)
+        {
+            float WHOLESALE_DISCOUNT = ValidateWholesaleDiscount(count);
+            Discount = Price * WHOLESALE_DISCOUNT;
+            return Discount;
+        }
+
+        private float ValidateWholesaleDiscount(int count)
+        {
+            const float WHOLESALE_DISCOUNT = 0.15f;
+            return (count - 10) * WHOLESALE_DISCOUNT / 100;
+        }
+
+        private float ValidateAntiquityDiscount(int years)
+        {
+            float DISCOUNT;
+            if (years <= 0)
+            {
+                DISCOUNT = 0;
+            }
+            else if (years <= 2)
+            {
+                DISCOUNT = 0.12f;
+            }
+            else
+            {
+                DISCOUNT = 0.17f;
+            }
+
+            return DISCOUNT;
+        }
     }
 }

@@ -21,36 +21,31 @@ namespace LibraryQuotes.Services
             float discount = 0;
             float RETAIL_INCREASE = ValidateIncreaseRetailPurchase(copies.Count);
 
-            foreach (var copy in copies)
-            {
-                copy.CalculateIncrease(RETAIL_INCREASE);
-            }
+            copies.ForEach(copy => copy.CalculateIncrease(RETAIL_INCREASE));
 
             if (copies.Count > 10)
             {
-                discount = CalculateDiscounts(copies);
+                CalculateDiscounts(copies);
             }
 
             foreach (var copy in copies)
             {
-                discount =+ copy.CalculateDiscount(payload.AntiquityYears);
+                copy.CalculateDiscount(payload.AntiquityYears);
                 total += copy.TotalPrice;
+                discount += copy.Discount;
             }
 
             return new ListCopies(payload.AntiquityYears, copies, total, discount);
         }
 
-        private float CalculateDiscounts(List<Copy> payload)
+        private void CalculateDiscounts(List<Copy> payload)
         {
             payload = payload.OrderByDescending(x => x.Price).ToList();
-            float discount = 0;
 
             for (int i = 10; i < payload.Count; i++)
             {
-                discount += payload[i].CalculateWholesaleDiscount(payload.Count);
+                payload[i].CalculateWholesaleDiscount(payload.Count);
             }
-
-            return discount;
         }
 
         private float ValidateIncreaseRetailPurchase(int count)
