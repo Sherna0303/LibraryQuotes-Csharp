@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "bc104390-53a1-4963-ab4f-99444fc4dc97",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31093228"
+	},
+	"item": [
+		{
+			"name": "PrimerPuntoLibro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n        {\r\n            \"Name\": \"Libro\",\r\n            \"Author\": \"AutorLibro\",\r\n            \"Price\": 20,\r\n            \"Type\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_DEV}}/calculateCopyPrice",
+					"host": [
+						"{{URL_DEV}}"
+					],
+					"path": [
+						"calculateCopyPrice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PrimerPuntoNovela",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AntiquityYears\":3,\r\n    \"Copies\": [\r\n        {\r\n            \"Name\": \"Novela\",\r\n            \"Author\": \"AutorNovela\",\r\n            \"Price\": 20,\r\n            \"Type\": 1\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_DEV}}/calculateCopyPrice",
+					"host": [
+						"{{URL_DEV}}"
+					],
+					"path": [
+						"calculateCopyPrice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SegundoPuntoAlDetal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n        {\r\n            \"Name\": \"Libro 1\",\r\n            \"Author\": \"Autor 1\",\r\n            \"Price\": 10,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 1\",\r\n            \"Author\": \"Autor 2\",\r\n            \"Price\": 15,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Novela 2\",\r\n            \"Author\": \"Autor 3\",\r\n            \"Price\": 20,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 2\",\r\n            \"Author\": \"Autor 4\",\r\n            \"Price\": 12,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 3\",\r\n            \"Author\": \"Autor 5\",\r\n            \"Price\": 18,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 3\",\r\n            \"Author\": \"Autor 6\",\r\n            \"Price\": 11,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 4\",\r\n            \"Author\": \"Autor 7\",\r\n            \"Price\": 17,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 4\",\r\n            \"Author\": \"Autor 8\",\r\n            \"Price\": 9,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 5\",\r\n            \"Author\": \"Autor 9\",\r\n            \"Price\": 16,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 5\",\r\n            \"Author\": \"Autor 10\",\r\n            \"Price\": 13,\r\n            \"Type\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_DEV}}/calculateListCopyPrice",
+					"host": [
+						"{{URL_DEV}}"
+					],
+					"path": [
+						"calculateListCopyPrice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SegundoPuntoAlPorMayor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n        {\r\n            \"Name\": \"Libro 1\",\r\n            \"Author\": \"Autor 1\",\r\n            \"Price\": 10,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 1\",\r\n            \"Author\": \"Autor 2\",\r\n            \"Price\": 15,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Novela 2\",\r\n            \"Author\": \"Autor 3\",\r\n            \"Price\": 20,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 2\",\r\n            \"Author\": \"Autor 4\",\r\n            \"Price\": 12,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 3\",\r\n            \"Author\": \"Autor 5\",\r\n            \"Price\": 18,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 3\",\r\n            \"Author\": \"Autor 6\",\r\n            \"Price\": 11,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 4\",\r\n            \"Author\": \"Autor 7\",\r\n            \"Price\": 17,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 4\",\r\n            \"Author\": \"Autor 8\",\r\n            \"Price\": 9,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 5\",\r\n            \"Author\": \"Autor 9\",\r\n            \"Price\": 16,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 5\",\r\n            \"Author\": \"Autor 10\",\r\n            \"Price\": 13,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Libro 11\",\r\n            \"Author\": \"Autor 8\",\r\n            \"Price\": 13,\r\n            \"Type\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_DEV}}/calculateListCopyPrice",
+					"host": [
+						"{{URL_DEV}}"
+					],
+					"path": [
+						"calculateListCopyPrice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TercerPunto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Budget\":300,\r\n    \"ClientCopies\": {\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n            {\r\n                \"Name\": \"Libro 1\",\r\n                \"Author\": \"Autor 1\",\r\n                \"Price\": 10,\r\n                \"Type\": 0\r\n            },\r\n            {\r\n                \"Name\": \"Novela 1\",\r\n                \"Author\": \"Autor 2\",\r\n                \"Price\": 15,\r\n                \"Type\": 1\r\n            },\r\n            {\r\n                \"Name\": \"Novela 2\",\r\n                \"Author\": \"Autor 3\",\r\n                \"Price\": 20,\r\n                \"Type\": 1\r\n            },\r\n            {\r\n                \"Name\": \"Libro 2\",\r\n                \"Author\": \"Autor 4\",\r\n                \"Price\": 12,\r\n                \"Type\": 0\r\n            },\r\n            {\r\n                \"Name\": \"Novela 3\",\r\n                \"Author\": \"Autor 5\",\r\n                \"Price\": 18,\r\n                \"Type\": 1\r\n            },\r\n            {\r\n                \"Name\": \"Libro 3\",\r\n                \"Author\": \"Autor 6\",\r\n                \"Price\": 11,\r\n                \"Type\": 0\r\n            },\r\n            {\r\n                \"Name\": \"Novela 4\",\r\n                \"Author\": \"Autor 7\",\r\n                \"Price\": 17,\r\n                \"Type\": 1\r\n            },\r\n            {\r\n                \"Name\": \"Libro 4\",\r\n                \"Author\": \"Autor 8\",\r\n                \"Price\": 9,\r\n                \"Type\": 0\r\n            },\r\n            {\r\n                \"Name\": \"Novela 5\",\r\n                \"Author\": \"Autor 9\",\r\n                \"Price\": 16,\r\n                \"Type\": 1\r\n            },\r\n            {\r\n                \"Name\": \"Libro 5\",\r\n                \"Author\": \"Autor 10\",\r\n                \"Price\": 13,\r\n                \"Type\": 0\r\n            }\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_DEV}}/calculateBudget",
+					"host": [
+						"{{URL_DEV}}"
+					],
+					"path": [
+						"calculateBudget"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL_DEV",
+			"value": "http://localhost:5203",
+			"type": "string"
+		}
+	]
+}
