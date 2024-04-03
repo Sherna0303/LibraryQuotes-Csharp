@@ -1,9 +1,9 @@
 using LibraryQuotes.Models.Factories;
 using LibraryQuotes.Services;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 
@@ -12,13 +12,27 @@ builder.Services.AddTransient<IQuotationService, QuotationService>();
 builder.Services.AddTransient<IQuoteListService, QuoteListService>();
 builder.Services.AddTransient<IBudgetService, BudgetService>();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "LibraryQuotes API",
+        Description = "An ASP.NET Core Web API",
+        Contact = new OpenApiContact
+        {
+            Name = "GitHub",
+            Url = new Uri("https://github.com/Sherna0303/LibraryQuotes-Csharp")
+        },
+    });
+
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
