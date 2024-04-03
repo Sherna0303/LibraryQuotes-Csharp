@@ -13,7 +13,7 @@ namespace LibraryQuotes.Services
             _copyFactory = copyFactory;
         }
 
-        public Copy CalculatePrice(ClientDTO payload)
+        public CopyEntity CalculatePrice(ClientDTO payload)
         {
             float RETAIL_INCREASE = 1;
             var copy = _copyFactory.Create(payload.Copies.FirstOrDefault());

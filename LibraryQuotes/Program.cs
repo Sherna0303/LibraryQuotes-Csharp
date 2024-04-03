@@ -1,5 +1,8 @@
+using LibraryQuotes.Models.DataBase;
+using LibraryQuotes.Models.DataBase.Interfaces;
 using LibraryQuotes.Models.Factories;
 using LibraryQuotes.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
@@ -7,9 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddDbContext<Database>(options => options.UseSqlServer(builder.Configuration["SQLConnectionString"]));
 builder.Services.AddSingleton<ICopyFactory, CopyFactory>();
 builder.Services.AddTransient<IQuotationService, QuotationService>();
 builder.Services.AddTransient<IQuoteListService, QuoteListService>();
+builder.Services.AddScoped<IDatabase, Database>();
 builder.Services.AddTransient<IBudgetService, BudgetService>();
 
 builder.Services.AddEndpointsApiExplorer();

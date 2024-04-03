@@ -5,6 +5,6 @@ namespace LibraryQuotes.Models.Factories
 {
     public interface ICopyFactory
     {
-        Copy Create(CopyDTO payload);
+        CopyEntity Create(CopyDTO payload);
     }
 }

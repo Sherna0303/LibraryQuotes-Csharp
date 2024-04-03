@@ -1,17 +1,17 @@
 ﻿namespace LibraryQuotes.Models.Entities
 {
-    public class ListCopies
+    public class ListCopiesEntity
     {
         public int AntiquityYears { get; set; }
         public float Total { get; set; }
         public float TotalDiscount { get; set; }
-        public List<Copy> Copies { get; set; }
+        public List<CopyEntity> Copies { get; set; }
 
-        public ListCopies()
+        public ListCopiesEntity()
         {
         }
 
-        public ListCopies(int antiquityYears, List<Copy> copies, float total, float totalDiscount)
+        public ListCopiesEntity(int antiquityYears, List<CopyEntity> copies, float total, float totalDiscount)
         {
             AntiquityYears = antiquityYears;
             Copies = copies;

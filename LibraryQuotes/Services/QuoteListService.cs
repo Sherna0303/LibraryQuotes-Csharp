@@ -13,7 +13,7 @@ namespace LibraryQuotes.Services
             _copyFactory = copyFactory;
         }
 
-        public ListCopies CalculatePriceListCopies(ClientDTO payload)
+        public ListCopiesEntity CalculatePriceListCopies(ClientDTO payload)
         {
             var copies = payload.Copies.Select(item => _copyFactory.Create(item)).ToList();
 
@@ -35,10 +35,10 @@ namespace LibraryQuotes.Services
                 discount += copy.Discount;
             }
 
-            return new ListCopies(payload.AntiquityYears, copies, total, discount);
+            return new ListCopiesEntity(payload.AntiquityYears, copies, total, discount);
         }
 
-        private void CalculateDiscounts(List<Copy> payload)
+        private void CalculateDiscounts(List<CopyEntity> payload)
         {
             payload = payload.OrderByDescending(x => x.Price).ToList();
 

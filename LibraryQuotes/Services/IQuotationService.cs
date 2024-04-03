@@ -5,6 +5,6 @@ namespace LibraryQuotes.Services
 {
     public interface IQuotationService
     {
-        Copy CalculatePrice(ClientDTO payload);
+        CopyEntity CalculatePrice(ClientDTO payload);
     }
 }
