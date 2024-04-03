@@ -6,15 +6,15 @@
         {
         }
 
-        public Book(string name, string author, float price) : base(name, author, price)
+        public Book(string name, string author, float price, float discount) : base(name, author, price, discount)
         {
-            INCREASE_PRICE = 4f/3f;
+            INCREASE_PRICE = 4f / 3f;
         }
 
         public override float CalculateIncrease(float RETAIL_INCREASE)
         {
-            TotalPrice = Price * INCREASE_PRICE * RETAIL_INCREASE;
-            return TotalPrice;
+            Price = Price * INCREASE_PRICE * RETAIL_INCREASE;
+            return Price;
         }
     }
 }
