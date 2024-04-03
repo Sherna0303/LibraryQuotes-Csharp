@@ -10,11 +10,13 @@ namespace LibraryQuotes.Controllers
     {
         private readonly IQuotationService _quotationService;
         private readonly IQuoteListService _quoteListService;
+        private readonly IBudgetService _budgetService;
 
-        public QuotesController(IQuotationService quotationService, IQuoteListService quoteListService)
+        public QuotesController(IQuotationService quotationService, IQuoteListService quoteListService, IBudgetService budgetService)
         {
             _quotationService = quotationService;
             _quoteListService = quoteListService;
+            _budgetService = budgetService;
         }
 
         [HttpPost("/calculateCopyPrice")]
@@ -27,6 +29,12 @@ namespace LibraryQuotes.Controllers
         public async Task<IActionResult> CalculateListCopyPrice(ClientDTO payload)
         {
             return StatusCode(StatusCodes.Status200OK, _quoteListService.CalculatePriceListCopies(payload));
+        }
+
+        [HttpPost("/calculateBudget")]
+        public async Task<IActionResult> CalculateBudget(BudgetClientDTO payload)
+        {
+            return StatusCode(StatusCodes.Status200OK, _budgetService.CalculateBudget(payload));
         }
     }
 }
