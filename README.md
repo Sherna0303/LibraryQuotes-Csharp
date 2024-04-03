@@ -18,7 +18,9 @@ cd LibraryQuotes
 
 3. Ahora puedes abrir el proyecto utilizando de preferencia el entorno de desarrollo VisualStudio.
 
-4. Una vez abierto puedes iniciar el proyecto con el boton RUN con el texto "https".
+4. Instala en NuGet la libreria "FlientValidation" para las validaciones de entrada.
+
+5. Una vez abierto puedes iniciar el proyecto con el boton RUN con el texto "https".
 
 ## Usage/Examples
 
@@ -30,27 +32,58 @@ http://localhost:5203
 ```
 http://localhost:5203/calculateCopyPrice
 {
-  "Name": "Libro",
-  "Author": "Libro",
-  "Price": 22,
-  "Type": 1
+    "AntiquityYears":0,
+    "Copies": [
+        {
+            "Name": "Novela 1",
+            "Author": "Autor 2",
+            "Price": 15,
+            "Type": 1
+        }
+    ]
 }
 ```
 3. Ahora podemos hacer uso del segundo endPoint,
 ```
 http://localhost:5203/calculateListCopyPrice
-[
-    {
-        "Name": "Libro",
-        "Author": "Libro",
-        "Price": 20,
-        "Type": 0
-    },
-    {
-        "Name": "Novela",
-        "Author": "Novela",
-        "Price": 20,
-        "Type": 1
-    }
-]
+{
+    "AntiquityYears":0,
+    "Copies": [
+        {
+            "Name": "Libro 1",
+            "Author": "Autor 1",
+            "Price": 10,
+            "Type": 0
+        },
+        {
+            "Name": "Novela 1",
+            "Author": "Autor 2",
+            "Price": 15,
+            "Type": 1
+        }
+    ]
+}
+```
+4. Ahora podemos hacer uso del tercer endPoint,
+```
+http://localhost:5203/calculateBudget
+{
+    "Budget":300,
+    "ClientCopies": {
+    "AntiquityYears":0,
+    "Copies": [
+            {
+                "Name": "Libro 1",
+                "Author": "Autor 1",
+                "Price": 10,
+                "Type": 0
+            },
+            {
+                "Name": "Novela 1",
+                "Author": "Autor 2",
+                "Price": 15,
+                "Type": 1
+            }
+    ]
+}
 ```
