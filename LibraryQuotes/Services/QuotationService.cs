@@ -1,6 +1,5 @@
 ﻿using LibraryQuotes.Models.DataBase.Interfaces;
 using LibraryQuotes.Models.DTOS;
-using LibraryQuotes.Models.Entities;
 using LibraryQuotes.Models.Factories;
 using LibraryQuotes.Models.Persistence;
 using LibraryQuotes.Services.Interfaces;
@@ -23,7 +22,6 @@ namespace LibraryQuotes.Services
             var copy = _copyFactory.Create(payload.Copies.First());
             copy.CalculateIncrease();
             copy.CalculateDiscount(payload.AntiquityYears);
-
 
             var copyDb = new Copy()
             {

@@ -8,10 +8,24 @@ namespace LibraryQuotes.Services
     public class QuoteListService : IQuoteListService
     {
         private readonly ICopyFactory _copyFactory;
+        private readonly IGetCopiesService _getCopiesService;
 
-        public QuoteListService(ICopyFactory copyFactory)
+        public QuoteListService(ICopyFactory copyFactory, IGetCopiesService getCopiesService)
         {
             _copyFactory = copyFactory;
+            _getCopiesService = getCopiesService;
+        }
+
+        public ListCopiesEntity CalculatePriceListCopiesAndConvertToClientDTO(ClientListDTO payload)
+        {
+            var copiesDTO = _getCopiesService.GetCopiesByIdAndAmountAsync(payload).Result;
+
+            if (copiesDTO == null)
+            {
+                return null;
+            }
+
+            return CalculatePriceListCopies(copiesDTO);
         }
 
         public ListCopiesEntity CalculatePriceListCopies(ClientDTO payload)

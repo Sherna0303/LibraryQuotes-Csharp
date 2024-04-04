@@ -21,6 +21,7 @@ builder.Services.AddTransient<IBudgetService, BudgetService>();
 builder.Services.AddScoped<IDatabase, Database>();
 builder.Services.AddScoped<IValidator<ClientDTO>, ClientValidator>();
 builder.Services.AddScoped<IValidator<BudgetClientDTO>, BudgetClientValidator>();
+builder.Services.AddScoped<IGetCopiesService, GetCopiesService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>

@@ -69,16 +69,16 @@ namespace LibraryQuotes.Controllers
         /// Calculate the price of a list of copies
         /// </summary>
         [HttpPost("/calculateListCopyPrice")]
-        public async Task<IActionResult> CalculateListCopyPrice(ClientDTO payload)
+        public async Task<IActionResult> CalculateListCopyPrice(ClientListDTO payload)
         {
-            var validateClient = await _clientValidator.ValidateAsync(payload);
+            //var validateClient = await _clientValidator.ValidateAsync(payload);
 
-            if (!validateClient.IsValid)
-            {
-                return StatusCode(StatusCodes.Status400BadRequest, validateClient.Errors);
-            }
+            //if (!validateClient.IsValid)
+            //{
+            //    return StatusCode(StatusCodes.Status400BadRequest, validateClient.Errors);
+            //}
 
-            return StatusCode(StatusCodes.Status200OK, _quoteListService.CalculatePriceListCopies(payload));
+            return StatusCode(StatusCodes.Status200OK, _quoteListService.CalculatePriceListCopiesAndConvertToClientDTO(payload));
         }
 
         /// <summary>
