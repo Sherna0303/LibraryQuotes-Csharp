@@ -1,4 +1,6 @@
-﻿using LibraryQuotes.Models.DTOS;
+﻿using LibraryQuotes.Models.DTOS.Budget;
+using LibraryQuotes.Models.DTOS.Quoation;
+using LibraryQuotes.Models.DTOS.QuoteList;
 using LibraryQuotes.Models.Entities;
 using LibraryQuotes.Models.Enums;
 using LibraryQuotes.Services.Interfaces;

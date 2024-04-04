@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using LibraryQuotes.Models.Enums;
 
-namespace LibraryQuotes.Models.DTOS
+namespace LibraryQuotes.Models.DTOS.Quoation
 {
     public class CopyDTO
     {

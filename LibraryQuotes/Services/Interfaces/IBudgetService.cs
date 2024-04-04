@@ -1,4 +1,5 @@
-﻿using LibraryQuotes.Models.DTOS;
+﻿using LibraryQuotes.Models.DTOS.Budget;
+using LibraryQuotes.Models.DTOS.QuoteList;
 using LibraryQuotes.Models.Entities;
 
 namespace LibraryQuotes.Services.Interfaces

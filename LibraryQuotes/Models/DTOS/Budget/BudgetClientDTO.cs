@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace LibraryQuotes.Models.DTOS
+namespace LibraryQuotes.Models.DTOS.Budget
 {
     public class BudgetClientDTO
     {
@@ -13,7 +13,8 @@ namespace LibraryQuotes.Models.DTOS
         public BudgetClientValidator()
         {
             RuleFor(x => x.Budget).NotNull().NotEmpty().GreaterThanOrEqualTo(0);
-            //RuleFor(x => x.ClientCopies).SetValidator(new ClientValidator());
+            RuleFor(x => x.ClientCopies).NotNull().NotEmpty();
+            RuleFor(x => x.ClientCopies).SetValidator(new ClientListIdValidator());
         }
     }
 }

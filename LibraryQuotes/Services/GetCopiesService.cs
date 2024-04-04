@@ -1,5 +1,7 @@
 ﻿using LibraryQuotes.Models.DataBase.Interfaces;
-using LibraryQuotes.Models.DTOS;
+using LibraryQuotes.Models.DTOS.Budget;
+using LibraryQuotes.Models.DTOS.Quoation;
+using LibraryQuotes.Models.DTOS.QuoteList;
 using LibraryQuotes.Models.Persistence;
 using LibraryQuotes.Services.Interfaces;
 

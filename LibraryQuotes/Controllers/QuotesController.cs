@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
-using LibraryQuotes.Models.DTOS;
+using LibraryQuotes.Models.DTOS.Budget;
+using LibraryQuotes.Models.DTOS.Quoation;
+using LibraryQuotes.Models.DTOS.QuoteList;
 using LibraryQuotes.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 
 namespace LibraryQuotes.Controllers
 {
@@ -13,14 +14,16 @@ namespace LibraryQuotes.Controllers
         private readonly IQuotationService _quotationService;
         private readonly IQuoteListService _quoteListService;
         private readonly IBudgetService _budgetService;
-        private readonly IValidator<ClientDTO> _clientValidator;
+        private readonly IValidator<CopyDTO> _copyValidator;
+        private readonly IValidator<ClientListAndAmountDTO> _clientValidator;
         private readonly IValidator<BudgetClientDTO> _budgetClientValidator;
 
-        public QuotesController(IQuotationService quotationService, IQuoteListService quoteListService, IBudgetService budgetService, IValidator<ClientDTO> clientValidator, IValidator<BudgetClientDTO> budgetClientValidator)
+        public QuotesController(IQuotationService quotationService, IQuoteListService quoteListService, IBudgetService budgetService, IValidator<CopyDTO> copyValidator, IValidator<ClientListAndAmountDTO> clientValidator, IValidator<BudgetClientDTO> budgetClientValidator)
         {
             _quotationService = quotationService;
             _quoteListService = quoteListService;
             _budgetService = budgetService;
+            _copyValidator = copyValidator;
             _clientValidator = clientValidator;
             _budgetClientValidator = budgetClientValidator;
         }
@@ -31,24 +34,19 @@ namespace LibraryQuotes.Controllers
         /// /// <remarks>
         /// Sample request:
         ///
-        ///     POST /calculateCopyPrice
-        ///     {
-        ///         "AntiquityYears":0,
-        ///         "Copies": [
-        ///             {
-        ///                 "Name": "Libro",
-        ///                 "Author": "AutorLibro",
-        ///                 "Price": 20,
-        ///                 "Type": 0
-        ///              }
-        ///          ]
-        ///     }
+        ///         POST /calculateCopyPrice
+        ///         {
+        ///            "Name": "Libro",
+        ///            "Author": "AutorLibro",
+        ///            "Price": 20,
+        ///            "Type": 0
+        ///         }
         ///
         /// </remarks>
-        [HttpPost("/calculateCopyPrice")]
-        public async Task<IActionResult> CalculateCopyPrice(ClientDTO payload)
+    [HttpPost("/calculateCopyPrice")]
+        public async Task<IActionResult> CalculateCopyPrice(CopyDTO payload)
         {
-            var validateClient = await _clientValidator.ValidateAsync(payload);
+            var validateClient = await _copyValidator.ValidateAsync(payload);
 
             if (!validateClient.IsValid)
             {
@@ -71,12 +69,12 @@ namespace LibraryQuotes.Controllers
         [HttpPost("/calculateListCopyPrice")]
         public async Task<IActionResult> CalculateListCopyPrice(ClientListAndAmountDTO payload)
         {
-            //var validateClient = await _clientValidator.ValidateAsync(payload);
+            var validateClient = await _clientValidator.ValidateAsync(payload);
 
-            //if (!validateClient.IsValid)
-            //{
-            //    return StatusCode(StatusCodes.Status400BadRequest, validateClient.Errors);
-            //}
+            if (!validateClient.IsValid)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, validateClient.Errors);
+            }
 
             return StatusCode(StatusCodes.Status200OK, _quoteListService.CalculatePriceListCopiesAndConvertToClientDTO(payload));
         }
@@ -87,12 +85,12 @@ namespace LibraryQuotes.Controllers
         [HttpPost("/calculateBudget")]
         public async Task<IActionResult> CalculateBudget(BudgetClientDTO payload)
         {
-            //var validateBudget = await _budgetClientValidator.ValidateAsync(payload);
+            var validateBudget = await _budgetClientValidator.ValidateAsync(payload);
 
-            //if (!validateBudget.IsValid)
-            //{
-            //    return StatusCode(StatusCodes.Status400BadRequest, validateBudget.Errors);
-            //}
+            if (!validateBudget.IsValid)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, validateBudget.Errors);
+            }
 
             return StatusCode(StatusCodes.Status200OK, _budgetService.CalculateBudgetAndConvertToClientDTO(payload));
         }
