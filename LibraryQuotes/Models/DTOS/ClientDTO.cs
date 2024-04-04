@@ -12,8 +12,8 @@ namespace LibraryQuotes.Models.DTOS
     {
         public ClientValidator()
         {
-            RuleFor(x => x.AntiquityYears).NotNull().NotEmpty().GreaterThanOrEqualTo(0);
-            RuleFor(x => x.Copies).NotNull().NotEmpty();
+            RuleFor(x => x.AntiquityYears).NotNull().GreaterThanOrEqualTo(0);
+            RuleForEach(x => x.Copies).SetValidator(new CopyValidator());
         }
     }
 }

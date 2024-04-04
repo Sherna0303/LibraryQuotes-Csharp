@@ -1,6 +1,8 @@
-﻿using LibraryQuotes.Models.DTOS;
-using LibraryQuotes.Services;
+﻿using FluentValidation;
+using LibraryQuotes.Models.DTOS;
+using LibraryQuotes.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace LibraryQuotes.Controllers
 {
@@ -11,12 +13,16 @@ namespace LibraryQuotes.Controllers
         private readonly IQuotationService _quotationService;
         private readonly IQuoteListService _quoteListService;
         private readonly IBudgetService _budgetService;
+        private readonly IValidator<ClientDTO> _clientValidator;
+        private readonly IValidator<BudgetClientDTO> _budgetClientValidator;
 
-        public QuotesController(IQuotationService quotationService, IQuoteListService quoteListService, IBudgetService budgetService)
+        public QuotesController(IQuotationService quotationService, IQuoteListService quoteListService, IBudgetService budgetService, IValidator<ClientDTO> clientValidator, IValidator<BudgetClientDTO> budgetClientValidator)
         {
             _quotationService = quotationService;
             _quoteListService = quoteListService;
             _budgetService = budgetService;
+            _clientValidator = clientValidator;
+            _budgetClientValidator = budgetClientValidator;
         }
 
         /// <summary>
@@ -42,7 +48,21 @@ namespace LibraryQuotes.Controllers
         [HttpPost("/calculateCopyPrice")]
         public async Task<IActionResult> CalculateCopyPrice(ClientDTO payload)
         {
-            return StatusCode(StatusCodes.Status200OK, _quotationService.CalculatePrice(payload));
+            var validateClient = await _clientValidator.ValidateAsync(payload);
+
+            if (!validateClient.IsValid)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, validateClient.Errors);
+            }
+
+            var result = await _quotationService.CalculatePrice(payload);
+
+            if (result == null)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, new { Error = "Copy cannot be created" });
+            }
+
+            return StatusCode(StatusCodes.Status200OK, result);
         }
 
         /// <summary>
@@ -51,6 +71,13 @@ namespace LibraryQuotes.Controllers
         [HttpPost("/calculateListCopyPrice")]
         public async Task<IActionResult> CalculateListCopyPrice(ClientDTO payload)
         {
+            var validateClient = await _clientValidator.ValidateAsync(payload);
+
+            if (!validateClient.IsValid)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, validateClient.Errors);
+            }
+
             return StatusCode(StatusCodes.Status200OK, _quoteListService.CalculatePriceListCopies(payload));
         }
 
@@ -60,6 +87,13 @@ namespace LibraryQuotes.Controllers
         [HttpPost("/calculateBudget")]
         public async Task<IActionResult> CalculateBudget(BudgetClientDTO payload)
         {
+            var validateBudget = await _budgetClientValidator.ValidateAsync(payload);
+
+            if (!validateBudget.IsValid)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, validateBudget.Errors);
+            }
+
             return StatusCode(StatusCodes.Status200OK, _budgetService.CalculateBudget(payload));
         }
     }
