@@ -19,7 +19,6 @@ builder.Services.AddTransient<IQuotationService, QuotationService>();
 builder.Services.AddTransient<IQuoteListService, QuoteListService>();
 builder.Services.AddTransient<IBudgetService, BudgetService>();
 builder.Services.AddScoped<IDatabase, Database>();
-builder.Services.AddScoped<IValidator<CopyDTO>, CopyValidator>();
 builder.Services.AddScoped<IValidator<ClientDTO>, ClientValidator>();
 builder.Services.AddScoped<IValidator<BudgetClientDTO>, BudgetClientValidator>();
 

@@ -20,9 +20,8 @@ namespace LibraryQuotes.Services
 
         public async Task<Copy> CalculatePrice(ClientDTO payload)
         {
-            float RETAIL_INCREASE = 1;
             var copy = _copyFactory.Create(payload.Copies.First());
-            copy.CalculateIncrease(RETAIL_INCREASE);
+            copy.CalculateIncrease();
             copy.CalculateDiscount(payload.AntiquityYears);
 
 

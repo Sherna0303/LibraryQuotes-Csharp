@@ -22,7 +22,7 @@ namespace LibraryQuotes.Services
             float discount = 0;
             float RETAIL_INCREASE = ValidateIncreaseRetailPurchase(copies.Count);
 
-            copies.ForEach(copy => copy.CalculateIncrease(RETAIL_INCREASE));
+            copies.ForEach(copy => copy.CalculateIncreaseDetal(RETAIL_INCREASE));
 
             if (copies.Count > 10)
             {

@@ -38,7 +38,7 @@ namespace LibraryQuotes.Controllers
         ///             {
         ///                 "Name": "Libro",
         ///                 "Author": "AutorLibro",
-        ///                  "Price": 20,
+        ///                 "Price": 20,
         ///                 "Type": 0
         ///              }
         ///          ]

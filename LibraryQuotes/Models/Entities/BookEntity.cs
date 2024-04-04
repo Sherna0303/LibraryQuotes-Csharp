@@ -11,9 +11,15 @@
             INCREASE_PRICE = 4f / 3f;
         }
 
-        public override float CalculateIncrease(float RETAIL_INCREASE)
+        public override float CalculateIncrease()
         {
-            Price = Price * INCREASE_PRICE * RETAIL_INCREASE;
+            Price = Price * INCREASE_PRICE;
+            return Price;
+        }
+
+        public override float CalculateIncreaseDetal(float RETAIL_INCREASE)
+        {
+            Price = Price * RETAIL_INCREASE;
             return Price;
         }
     }

@@ -21,7 +21,8 @@
             Discount = discount;
         }
 
-        public abstract float CalculateIncrease(float RETAIL_INCREASE);
+        public abstract float CalculateIncrease();
+        public abstract float CalculateIncreaseDetal(float RETAIL_INCREASE);
 
         public float CalculateDiscount(int AntiquityYears)
         {
