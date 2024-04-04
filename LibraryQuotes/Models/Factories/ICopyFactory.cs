@@ -1,4 +1,4 @@
-﻿using LibraryQuotes.Models.DTOS;
+﻿using LibraryQuotes.Models.DTOS.Quoation;
 using LibraryQuotes.Models.Entities;
 
 namespace LibraryQuotes.Models.Factories

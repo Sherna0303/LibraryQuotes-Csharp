@@ -7,7 +7,7 @@ namespace LibraryQuotes.Models.Persistence
         public int CopyId { get; set; }
         public string Name { get; set; }
         public string Author { get; set; }
-        public float Price { get; set; }
+        public double Price { get; set; }
         public CopyType Type { get; set; }
     }
 }

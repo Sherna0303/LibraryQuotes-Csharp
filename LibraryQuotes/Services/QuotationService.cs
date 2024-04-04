@@ -1,6 +1,5 @@
 ﻿using LibraryQuotes.Models.DataBase.Interfaces;
-using LibraryQuotes.Models.DTOS;
-using LibraryQuotes.Models.Entities;
+using LibraryQuotes.Models.DTOS.Quoation;
 using LibraryQuotes.Models.Factories;
 using LibraryQuotes.Models.Persistence;
 using LibraryQuotes.Services.Interfaces;
@@ -18,20 +17,17 @@ namespace LibraryQuotes.Services
             _database = database;
         }
 
-        public async Task<Copy> CalculatePrice(ClientDTO payload)
+        public async Task<Copy> CalculatePrice(CopyDTO payload)
         {
-            float RETAIL_INCREASE = 1;
-            var copy = _copyFactory.Create(payload.Copies.First());
-            copy.CalculateIncrease(RETAIL_INCREASE);
-            copy.CalculateDiscount(payload.AntiquityYears);
-
+            var copy = _copyFactory.Create(payload);
+            copy.CalculateIncrease();
 
             var copyDb = new Copy()
             {
                 Name = copy.Name,
                 Author = copy.Author,
                 Price = copy.Price,
-                Type = payload.Copies.First().Type,
+                Type = payload.Type,
             };
 
             await _database.copy.AddAsync(copyDb);

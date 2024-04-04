@@ -1,7 +1,9 @@
 using FluentValidation;
 using LibraryQuotes.Models.DataBase;
 using LibraryQuotes.Models.DataBase.Interfaces;
-using LibraryQuotes.Models.DTOS;
+using LibraryQuotes.Models.DTOS.Budget;
+using LibraryQuotes.Models.DTOS.Quoation;
+using LibraryQuotes.Models.DTOS.QuoteList;
 using LibraryQuotes.Models.Factories;
 using LibraryQuotes.Services;
 using LibraryQuotes.Services.Interfaces;
@@ -20,8 +22,9 @@ builder.Services.AddTransient<IQuoteListService, QuoteListService>();
 builder.Services.AddTransient<IBudgetService, BudgetService>();
 builder.Services.AddScoped<IDatabase, Database>();
 builder.Services.AddScoped<IValidator<CopyDTO>, CopyValidator>();
-builder.Services.AddScoped<IValidator<ClientDTO>, ClientValidator>();
+builder.Services.AddScoped<IValidator<ClientListAndAmountDTO>, ClientListAndAmountValidator>();
 builder.Services.AddScoped<IValidator<BudgetClientDTO>, BudgetClientValidator>();
+builder.Services.AddScoped<IGetCopiesService, GetCopiesService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>

@@ -1,4 +1,4 @@
-﻿using LibraryQuotes.Models.DTOS;
+﻿using LibraryQuotes.Models.DTOS.QuoteList;
 using LibraryQuotes.Models.Entities;
 using LibraryQuotes.Models.Factories;
 using LibraryQuotes.Services.Interfaces;
@@ -8,10 +8,24 @@ namespace LibraryQuotes.Services
     public class QuoteListService : IQuoteListService
     {
         private readonly ICopyFactory _copyFactory;
+        private readonly IGetCopiesService _getCopiesService;
 
-        public QuoteListService(ICopyFactory copyFactory)
+        public QuoteListService(ICopyFactory copyFactory, IGetCopiesService getCopiesService)
         {
             _copyFactory = copyFactory;
+            _getCopiesService = getCopiesService;
+        }
+
+        public ListCopiesEntity CalculatePriceListCopiesAndConvertToClientDTO(ClientListAndAmountDTO payload)
+        {
+            var copiesDTO = _getCopiesService.GetCopiesByIdAndAmountAsync(payload).Result;
+
+            if (copiesDTO == null)
+            {
+                throw new ArgumentException("The copy id does not exist in the database");
+            }
+
+            return CalculatePriceListCopies(copiesDTO);
         }
 
         public ListCopiesEntity CalculatePriceListCopies(ClientDTO payload)
@@ -22,7 +36,7 @@ namespace LibraryQuotes.Services
             float discount = 0;
             float RETAIL_INCREASE = ValidateIncreaseRetailPurchase(copies.Count);
 
-            copies.ForEach(copy => copy.CalculateIncrease(RETAIL_INCREASE));
+            copies.ForEach(copy => copy.CalculateIncreaseDetal(RETAIL_INCREASE));
 
             if (copies.Count > 10)
             {
