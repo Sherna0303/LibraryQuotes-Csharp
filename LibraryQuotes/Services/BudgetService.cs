@@ -33,27 +33,19 @@ namespace LibraryQuotes.Services
         public ListCopiesEntity CalculateBudget(ClientDTO payload, float budget)
         {
             var copies = _quoteListService.CalculatePriceListCopies(payload);
-            var listCopies = new List<CopyDTO>();
             var budgetTotal = new ListCopiesEntity();
+            var (lowestPriceCopy, highestPriceCopy) = GetLowestAndHighestPriceCopies(copies);
+            var listCopies = new List<CopyDTO> { highestPriceCopy };
 
-            var bookMin = copies.Copies.Where(copy => copy is BookEntity).MinBy(copy => copy.Price);
-            var novelMin = copies.Copies.Where(copy => copy is NovelEntity).MinBy(copy => copy.Price);
-            var book = ConvertCopyToCopyDTO(bookMin, CopyType.BOOK);
-            var novel = ConvertCopyToCopyDTO(novelMin, CopyType.NOVEL);
-
-            var (lowestPrice, highestPrice) = (bookMin.Price < novelMin.Price) ? (book, novel) : (novel, book);
-            listCopies.Add(highestPrice);
-
-            while (budgetTotal.Total <= budget)
+            while (budgetTotal.Total <= budget && listCopies.Count <= 700)
             {
-                listCopies.Add(lowestPrice);
+                listCopies.Add(lowestPriceCopy);
                 payload.Copies = listCopies;
                 budgetTotal = _quoteListService.CalculatePriceListCopies(payload);
             }
 
             listCopies.RemoveAt(listCopies.Count - 1);
             payload.Copies = listCopies;
-            budgetTotal = _quoteListService.CalculatePriceListCopies(payload);
 
             if (listCopies.Count <= 10)
             {
@@ -61,6 +53,14 @@ namespace LibraryQuotes.Services
             }
 
             return budgetTotal;
+        }
+
+        private (CopyDTO lowestPriceCopy, CopyDTO highestPriceCopy) GetLowestAndHighestPriceCopies(ListCopiesEntity copies)
+        {
+            var book = ConvertCopyToCopyDTO(copies.Copies.Where(copy => copy is BookEntity).MinBy(copy => copy.Price), CopyType.BOOK);
+            var novel = ConvertCopyToCopyDTO(copies.Copies.Where(copy => copy is NovelEntity).MinBy(copy => copy.Price), CopyType.NOVEL);
+
+            return book.Price < novel.Price ? (book, novel) : (novel, book);
         }
 
         private CopyDTO ConvertCopyToCopyDTO(CopyEntity copy, CopyType type)

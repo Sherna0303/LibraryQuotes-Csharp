@@ -43,7 +43,7 @@ namespace LibraryQuotes.Controllers
         ///         }
         ///
         /// </remarks>
-    [HttpPost("/calculateCopyPrice")]
+        [HttpPost("/calculateCopyPrice")]
         public async Task<IActionResult> CalculateCopyPrice(CopyDTO payload)
         {
             var validateClient = await _copyValidator.ValidateAsync(payload);

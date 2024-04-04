@@ -55,7 +55,7 @@ namespace LibraryQuotes.Services
 
         private void CalculateDiscounts(List<CopyEntity> payload)
         {
-            payload = payload.OrderByDescending(x => x.Price).ToList();
+            payload.Sort((x, y) => y.Price.CompareTo(x.Price));
 
             for (int i = 10; i < payload.Count; i++)
             {

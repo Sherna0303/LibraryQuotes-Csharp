@@ -27,7 +27,7 @@
         public float CalculateDiscount(int AntiquityYears)
         {
             float DISCOUNT_ANTIQUITY = ValidateAntiquityDiscount(AntiquityYears);
-            Discount += Price * DISCOUNT_ANTIQUITY;
+            Discount = Math.Max(Discount, Price * DISCOUNT_ANTIQUITY);
             TotalPrice = Price - Discount;
             return Discount;
         }
