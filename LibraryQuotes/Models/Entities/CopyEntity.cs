@@ -42,7 +42,8 @@
         private float ValidateWholesaleDiscount(int count)
         {
             const float WHOLESALE_DISCOUNT = 0.15f;
-            return (count - 10) * WHOLESALE_DISCOUNT / 100;
+            float discount = (count - 10) * WHOLESALE_DISCOUNT / 100;
+            return (discount < 1) ? discount : 1f;
         }
 
         private float ValidateAntiquityDiscount(int years)
