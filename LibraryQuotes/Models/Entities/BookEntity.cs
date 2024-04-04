@@ -1,12 +1,12 @@
 ﻿namespace LibraryQuotes.Models.Entities
 {
-    public class Book : Copy
+    public class BookEntity : CopyEntity
     {
-        public Book()
+        public BookEntity()
         {
         }
 
-        public Book(string name, string author, float price, float discount) : base(name, author, price, discount)
+        public BookEntity(string name, string author, float price, float discount) : base(name, author, price, discount)
         {
             INCREASE_PRICE = 4f / 3f;
         }

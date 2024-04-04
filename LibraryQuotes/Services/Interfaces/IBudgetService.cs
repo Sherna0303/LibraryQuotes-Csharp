@@ -1,10 +1,10 @@
 ﻿using LibraryQuotes.Models.DTOS;
 using LibraryQuotes.Models.Entities;
 
-namespace LibraryQuotes.Services
+namespace LibraryQuotes.Services.Interfaces
 {
     public interface IBudgetService
     {
-        ListCopies CalculateBudget(BudgetClientDTO payload);
+        ListCopiesEntity CalculateBudget(BudgetClientDTO payload);
     }
 }

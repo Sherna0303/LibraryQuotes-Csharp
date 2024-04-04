@@ -1,10 +1,10 @@
 ﻿using LibraryQuotes.Models.DTOS;
 using LibraryQuotes.Models.Entities;
 
-namespace LibraryQuotes.Services
+namespace LibraryQuotes.Services.Interfaces
 {
     public interface IQuoteListService
     {
-        ListCopies CalculatePriceListCopies(ClientDTO payload);
+        ListCopiesEntity CalculatePriceListCopies(ClientDTO payload);
     }
 }

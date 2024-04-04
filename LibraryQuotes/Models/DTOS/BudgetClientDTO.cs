@@ -13,7 +13,7 @@ namespace LibraryQuotes.Models.DTOS
         public BudgetClientValidator()
         {
             RuleFor(x => x.Budget).NotNull().NotEmpty().GreaterThanOrEqualTo(0);
-            RuleFor(x => x.ClientCopies).NotNull().NotEmpty();
+            RuleFor(x => x.ClientCopies).SetValidator(new ClientValidator());
         }
     }
 }

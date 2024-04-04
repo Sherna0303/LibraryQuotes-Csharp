@@ -6,12 +6,12 @@ namespace LibraryQuotes.Models.Factories
 {
     public class CopyFactory : ICopyFactory
     {
-        public Copy Create(CopyDTO payload)
+        public CopyEntity Create(CopyDTO payload)
         {
-            var copyChildren = new Dictionary<CopyType, Copy>
+            var copyChildren = new Dictionary<CopyType, CopyEntity>
             {
-                { CopyType.BOOK, new Book(payload.Name, payload.Author, payload.Price, 0) },
-                { CopyType.NOVEL, new Novel(payload.Name, payload.Author, payload.Price, 0) },
+                { CopyType.BOOK, new BookEntity(payload.Name, payload.Author, payload.Price, 0) },
+                { CopyType.NOVEL, new NovelEntity(payload.Name, payload.Author, payload.Price, 0) },
             };
 
             var copy = copyChildren.GetValueOrDefault(payload.Type);

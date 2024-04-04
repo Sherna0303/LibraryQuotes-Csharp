@@ -1,6 +1,7 @@
 ﻿using LibraryQuotes.Models.DTOS;
 using LibraryQuotes.Models.Entities;
 using LibraryQuotes.Models.Enums;
+using LibraryQuotes.Services.Interfaces;
 
 namespace LibraryQuotes.Services
 {
@@ -13,15 +14,15 @@ namespace LibraryQuotes.Services
             _quoteListService = quoteListService;
         }
 
-        public ListCopies CalculateBudget(BudgetClientDTO payload)
+        public ListCopiesEntity CalculateBudget(BudgetClientDTO payload)
         {
             var copies = _quoteListService.CalculatePriceListCopies(payload.ClientCopies);
             var listCopies = new List<CopyDTO>();
-            var budget = new ListCopies();
+            var budget = new ListCopiesEntity();
             float totalBudget = payload.Budget;
 
-            var bookMin = copies.Copies.Where(copy => copy is Book).MinBy(copy => copy.Price);
-            var novelMin = copies.Copies.Where(copy => copy is Novel).MinBy(copy => copy.Price);
+            var bookMin = copies.Copies.Where(copy => copy is BookEntity).MinBy(copy => copy.Price);
+            var novelMin = copies.Copies.Where(copy => copy is NovelEntity).MinBy(copy => copy.Price);
             var book = ConvertCopyToCopyDTO(bookMin, CopyType.BOOK);
             var novel = ConvertCopyToCopyDTO(novelMin, CopyType.NOVEL);
 
@@ -47,7 +48,7 @@ namespace LibraryQuotes.Services
             return budget;
         }
 
-        private CopyDTO ConvertCopyToCopyDTO(Copy copy, CopyType type)
+        private CopyDTO ConvertCopyToCopyDTO(CopyEntity copy, CopyType type)
         {
             var copyDto = new CopyDTO
             {

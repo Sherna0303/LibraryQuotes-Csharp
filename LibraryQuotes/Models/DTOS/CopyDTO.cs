@@ -18,7 +18,7 @@ namespace LibraryQuotes.Models.DTOS
             RuleFor(x => x.Name).NotNull().NotEmpty();
             RuleFor(x => x.Author).NotNull().NotEmpty();
             RuleFor(x => x.Price).NotNull().NotEmpty().GreaterThanOrEqualTo(0);
-            RuleFor(x => x.Type).NotNull().NotEmpty().IsInEnum();
+            RuleFor(x => x.Type).NotNull().IsInEnum();
         }
     }
 }

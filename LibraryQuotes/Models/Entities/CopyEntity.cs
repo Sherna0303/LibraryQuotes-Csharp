@@ -1,6 +1,6 @@
 ﻿namespace LibraryQuotes.Models.Entities
 {
-    public abstract class Copy
+    public abstract class CopyEntity
     {
         public string Name { get; set; }
         public string Author { get; set; }
@@ -9,11 +9,11 @@
         public float TotalPrice { get; set; }
         protected float INCREASE_PRICE = 0;
 
-        protected Copy()
+        protected CopyEntity()
         {
         }
 
-        protected Copy(string name, string author, float price, float discount)
+        protected CopyEntity(string name, string author, float price, float discount)
         {
             Name = name;
             Author = author;
