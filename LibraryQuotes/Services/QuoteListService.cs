@@ -16,13 +16,13 @@ namespace LibraryQuotes.Services
             _getCopiesService = getCopiesService;
         }
 
-        public ListCopiesEntity CalculatePriceListCopiesAndConvertToClientDTO(ClientListDTO payload)
+        public ListCopiesEntity CalculatePriceListCopiesAndConvertToClientDTO(ClientListAndAmountDTO payload)
         {
             var copiesDTO = _getCopiesService.GetCopiesByIdAndAmountAsync(payload).Result;
 
             if (copiesDTO == null)
             {
-                return null;
+                throw new ArgumentException("The copy id does not exist in the database");
             }
 
             return CalculatePriceListCopies(copiesDTO);

@@ -69,7 +69,7 @@ namespace LibraryQuotes.Controllers
         /// Calculate the price of a list of copies
         /// </summary>
         [HttpPost("/calculateListCopyPrice")]
-        public async Task<IActionResult> CalculateListCopyPrice(ClientListDTO payload)
+        public async Task<IActionResult> CalculateListCopyPrice(ClientListAndAmountDTO payload)
         {
             //var validateClient = await _clientValidator.ValidateAsync(payload);
 
@@ -87,14 +87,14 @@ namespace LibraryQuotes.Controllers
         [HttpPost("/calculateBudget")]
         public async Task<IActionResult> CalculateBudget(BudgetClientDTO payload)
         {
-            var validateBudget = await _budgetClientValidator.ValidateAsync(payload);
+            //var validateBudget = await _budgetClientValidator.ValidateAsync(payload);
 
-            if (!validateBudget.IsValid)
-            {
-                return StatusCode(StatusCodes.Status400BadRequest, validateBudget.Errors);
-            }
+            //if (!validateBudget.IsValid)
+            //{
+            //    return StatusCode(StatusCodes.Status400BadRequest, validateBudget.Errors);
+            //}
 
-            return StatusCode(StatusCodes.Status200OK, _budgetService.CalculateBudget(payload));
+            return StatusCode(StatusCodes.Status200OK, _budgetService.CalculateBudgetAndConvertToClientDTO(payload));
         }
     }
 }

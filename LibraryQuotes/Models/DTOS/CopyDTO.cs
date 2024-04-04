@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using LibraryQuotes.Models.Enums;
-using LibraryQuotes.Models.Persistence;
 
 namespace LibraryQuotes.Models.DTOS
 {

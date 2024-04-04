@@ -5,6 +5,7 @@ namespace LibraryQuotes.Services.Interfaces
 {
     public interface IBudgetService
     {
-        ListCopiesEntity CalculateBudget(BudgetClientDTO payload);
+        ListCopiesEntity CalculateBudgetAndConvertToClientDTO(BudgetClientDTO payload);
+        ListCopiesEntity CalculateBudget(ClientDTO payload, float budget);
     }
 }

@@ -4,7 +4,7 @@ namespace LibraryQuotes.Services.Interfaces
 {
     public interface IGetCopiesService
     {
-        Task<ClientDTO> GetCopiesByIdAndAmountAsync(ClientListDTO payload);
-        //Task<List<CopyDTO>> GetCopiesByIdAsync(BudgetClientDTO payload);
+        Task<ClientDTO> GetCopiesByIdAndAmountAsync(ClientListAndAmountDTO payload);
+        Task<ClientDTO> GetCopiesByIdAsync(ClientListIdDTO payload);
     }
 }

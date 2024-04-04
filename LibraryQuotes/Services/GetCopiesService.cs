@@ -14,7 +14,7 @@ namespace LibraryQuotes.Services
             _database = database;
         }
 
-        public async Task<ClientDTO> GetCopiesByIdAndAmountAsync(ClientListDTO payload)
+        public async Task<ClientDTO> GetCopiesByIdAndAmountAsync(ClientListAndAmountDTO payload)
         {
             var copies = new List<CopyDTO>();
 
@@ -33,22 +33,24 @@ namespace LibraryQuotes.Services
             return new ClientDTO { AntiquityYears = payload.AntiquityYears, Copies = copies};
         }
 
-        //public async Task<List<CopyDTO>> GetCopiesByIdAsync(BudgetClientDTO payload)
-        //{
-        //    var copies = new List<CopyDTO>();
+        public async Task<ClientDTO> GetCopiesByIdAsync(ClientListIdDTO payload)
+        {
+            var copies = new List<CopyDTO>();
 
-        //    foreach (var item in payload.ClientCopies)
-        //    {
-        //        Copy copy = await _database.copy.FindAsync(item.Id);
+            foreach (var item in payload.Copies)
+            {
+                Copy copy = await _database.copy.FindAsync(item.Id);
 
-        //        if (copy == null)
-        //        {
-        //            return null;
-        //        }
-        //    }
+                if (copy == null)
+                {
+                    return null;
+                }
 
-        //    return copies;
-        //}
+                copies.AddRange(ConvertToCopyDTOs(copy, 1));
+            }
+
+            return new ClientDTO { AntiquityYears = payload.AntiquityYears, Copies = copies };
+        }
 
         private List<CopyDTO> ConvertToCopyDTOs(Copy copy, int amount)
         {
