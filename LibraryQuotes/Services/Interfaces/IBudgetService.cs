@@ -1,7 +1,7 @@
 ﻿using LibraryQuotes.Models.DTOS;
 using LibraryQuotes.Models.Entities;
 
-namespace LibraryQuotes.Services
+namespace LibraryQuotes.Services.Interfaces
 {
     public interface IBudgetService
     {

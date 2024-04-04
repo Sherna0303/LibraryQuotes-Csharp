@@ -1,6 +1,7 @@
 ﻿using LibraryQuotes.Models.DTOS;
 using LibraryQuotes.Models.Entities;
 using LibraryQuotes.Models.Factories;
+using LibraryQuotes.Services.Interfaces;
 
 namespace LibraryQuotes.Services
 {
