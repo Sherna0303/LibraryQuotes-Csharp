@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "bc104390-53a1-4963-ab4f-99444fc4dc97",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31093228"
+	},
+	"item": [
+		{
+			"name": "PrimerPuntoLibro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Libro\",\r\n    \"Author\": \"Autor\",\r\n    \"Price\": 20,\r\n    \"Type\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_DEV}}/calculateCopyPrice",
+					"host": [
+						"{{URL_DEV}}"
+					],
+					"path": [
+						"calculateCopyPrice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PrimerPuntoNovela",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Novela\",\r\n    \"Author\": \"Autor\",\r\n    \"Price\": 20,\r\n    \"Type\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_DEV}}/calculateCopyPrice",
+					"host": [
+						"{{URL_DEV}}"
+					],
+					"path": [
+						"calculateCopyPrice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SegundoPuntoAlDetal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n        {\r\n            \"Id\": 2,\r\n            \"Amount\": 10\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_DEV}}/calculateListCopyPrice",
+					"host": [
+						"{{URL_DEV}}"
+					],
+					"path": [
+						"calculateListCopyPrice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SegundoPuntoAlPorMayor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n        {\r\n            \"Id\": 2,\r\n            \"Amount\": 20\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_DEV}}/calculateListCopyPrice",
+					"host": [
+						"{{URL_DEV}}"
+					],
+					"path": [
+						"calculateListCopyPrice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TercerPunto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Budget\":500,\r\n    \"ClientCopies\": {\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n            {\r\n                \"Id\": 2\r\n            },\r\n            {\r\n                \"Id\": 1\r\n            },\r\n            {\r\n                \"Id\": 6\r\n            }\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_DEV}}/calculateBudget",
+					"host": [
+						"{{URL_DEV}}"
+					],
+					"path": [
+						"calculateBudget"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL_DEV",
+			"value": "http://localhost:5203",
+			"type": "string"
+		}
+	]
+}
