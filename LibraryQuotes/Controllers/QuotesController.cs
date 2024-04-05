@@ -53,14 +53,14 @@ namespace LibraryQuotes.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, validateClient.Errors);
             }
 
-            var result = await _quotationService.CalculatePrice(payload);
-
-            if (result == null)
+            try
             {
-                return StatusCode(StatusCodes.Status400BadRequest, new { Error = "Copy cannot be created" });
+                return StatusCode(StatusCodes.Status200OK, await _quotationService.CalculatePrice(payload));
+            } 
+            catch (ArgumentException ex)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
             }
-
-            return StatusCode(StatusCodes.Status200OK, result);
         }
 
         /// <summary>
@@ -76,7 +76,14 @@ namespace LibraryQuotes.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, validateClient.Errors);
             }
 
-            return StatusCode(StatusCodes.Status200OK, _quoteListService.CalculatePriceListCopiesAndConvertToClientDTO(payload));
+            try
+            {
+                return StatusCode(StatusCodes.Status200OK, _quoteListService.CalculatePriceListCopiesAndConvertToClientDTO(payload));
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+            }
         }
 
         /// <summary>
@@ -92,7 +99,14 @@ namespace LibraryQuotes.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, validateBudget.Errors);
             }
 
-            return StatusCode(StatusCodes.Status200OK, _budgetService.CalculateBudgetAndConvertToClientDTO(payload));
+            try
+            {
+                return StatusCode(StatusCodes.Status200OK, _budgetService.CalculateBudgetAndConvertToClientDTO(payload));
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+            }
         }
     }
 }

@@ -4,6 +4,7 @@
     {
         public NovelEntity()
         {
+            INCREASE_PRICE = 2;
         }
 
         public NovelEntity(string name, string author, float price, float discount) : base(name, author, price, discount)

@@ -46,6 +46,7 @@ namespace LibraryQuotes.Services
 
             listCopies.RemoveAt(listCopies.Count - 1);
             payload.Copies = listCopies;
+            budgetTotal = _quoteListService.CalculatePriceListCopies(payload);
 
             if (listCopies.Count <= 10)
             {
