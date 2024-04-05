@@ -4,6 +4,7 @@
     {
         public BookEntity()
         {
+            INCREASE_PRICE = 4f / 3f;
         }
 
         public BookEntity(string name, string author, float price, float discount) : base(name, author, price, discount)
