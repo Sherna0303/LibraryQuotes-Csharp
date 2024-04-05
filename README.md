@@ -13,7 +13,7 @@ git clone https://github.com/Sherna0303/LibraryQuotes-Csharp.git
 
 2. Accede al repositorio desde consola bash de git:
 ```
-cd LibraryQuotes
+cd LibraryQuotes-Csharp
 ```
 
 3. Ahora puedes abrir el proyecto utilizando de preferencia el entorno de desarrollo VisualStudio.
@@ -32,15 +32,10 @@ http://localhost:5203
 ```
 http://localhost:5203/calculateCopyPrice
 {
-    "AntiquityYears":0,
-    "Copies": [
-        {
-            "Name": "Novela 1",
-            "Author": "Autor 2",
-            "Price": 15,
-            "Type": 1
-        }
-    ]
+    "Name": "Novela",
+    "Author": "Autor",
+    "Price": 20,
+    "Type": 1
 }
 ```
 3. Ahora podemos hacer uso del segundo endPoint,
@@ -50,17 +45,13 @@ http://localhost:5203/calculateListCopyPrice
     "AntiquityYears":0,
     "Copies": [
         {
-            "Name": "Libro 1",
-            "Author": "Autor 1",
-            "Price": 10,
-            "Type": 0
+            "Id": 2,
+            "Amount": 10
         },
         {
-            "Name": "Novela 1",
-            "Author": "Autor 2",
-            "Price": 15,
-            "Type": 1
-        }
+            "Id": 1,
+            "Amount": 2
+        },
     ]
 }
 ```
@@ -68,22 +59,10 @@ http://localhost:5203/calculateListCopyPrice
 ```
 http://localhost:5203/calculateBudget
 {
-    "Budget":300,
+    "Budget":500,
     "ClientCopies": {
-    "AntiquityYears":0,
-    "Copies": [
-            {
-                "Name": "Libro 1",
-                "Author": "Autor 1",
-                "Price": 10,
-                "Type": 0
-            },
-            {
-                "Name": "Novela 1",
-                "Author": "Autor 2",
-                "Price": 15,
-                "Type": 1
-            }
-    ]
+        "AntiquityYears":0,
+        "Copies": [{"Id": 2},{"Id": 1},{"Id": 6}]
+    }
 }
 ```
