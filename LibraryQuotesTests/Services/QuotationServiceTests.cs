@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using LibraryQuotes.Models.DataBase.Interfaces;
+﻿using LibraryQuotes.Models.DataBase.Interfaces;
 using LibraryQuotes.Models.DTOS.Quoation;
 using LibraryQuotes.Models.Entities;
 using LibraryQuotes.Models.Enums;
@@ -57,7 +56,7 @@ namespace LibraryQuotes.Services.Tests
 
             _copyFactory
                 .Setup(factory => factory.Create(It.IsAny<CopyDTO>()))
-                .Returns((copyEntity));
+                .Returns(copyEntity);
 
             _databaseMock
                 .Setup(database => database.SaveAsync())
@@ -122,12 +121,12 @@ namespace LibraryQuotes.Services.Tests
         [Fact]
         public async void CalculatePrice_ReturnsNullOnDatabaseSaveFailure()
         {
-            var copyDTO = new CopyDTO 
-            { 
-                Name = "Test", 
-                Author = "Test", 
-                Price = 10, 
-                Type = CopyType.NOVEL 
+            var copyDTO = new CopyDTO
+            {
+                Name = "Test",
+                Author = "Test",
+                Price = 10,
+                Type = CopyType.NOVEL
             };
 
             _copyFactory.Setup(f => f.Create(It.IsAny<CopyDTO>())).Returns(new NovelEntity());
