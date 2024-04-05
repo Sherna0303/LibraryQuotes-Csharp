@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n        {\r\n            \"Name\": \"Libro\",\r\n            \"Author\": \"AutorLibro\",\r\n            \"Price\": 20,\r\n            \"Type\": 0\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"Name\": \"Libro\",\r\n    \"Author\": \"Autor\",\r\n    \"Price\": 20,\r\n    \"Type\": 0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -39,7 +39,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"AntiquityYears\":3,\r\n    \"Copies\": [\r\n        {\r\n            \"Name\": \"Novela\",\r\n            \"Author\": \"AutorNovela\",\r\n            \"Price\": 20,\r\n            \"Type\": 1\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"Name\": \"Novela\",\r\n    \"Author\": \"Autor\",\r\n    \"Price\": 20,\r\n    \"Type\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -65,7 +65,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n        {\r\n            \"Name\": \"Libro 1\",\r\n            \"Author\": \"Autor 1\",\r\n            \"Price\": 10,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 1\",\r\n            \"Author\": \"Autor 2\",\r\n            \"Price\": 15,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Novela 2\",\r\n            \"Author\": \"Autor 3\",\r\n            \"Price\": 20,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 2\",\r\n            \"Author\": \"Autor 4\",\r\n            \"Price\": 12,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 3\",\r\n            \"Author\": \"Autor 5\",\r\n            \"Price\": 18,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 3\",\r\n            \"Author\": \"Autor 6\",\r\n            \"Price\": 11,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 4\",\r\n            \"Author\": \"Autor 7\",\r\n            \"Price\": 17,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 4\",\r\n            \"Author\": \"Autor 8\",\r\n            \"Price\": 9,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 5\",\r\n            \"Author\": \"Autor 9\",\r\n            \"Price\": 16,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 5\",\r\n            \"Author\": \"Autor 10\",\r\n            \"Price\": 13,\r\n            \"Type\": 0\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n        {\r\n            \"Id\": 2,\r\n            \"Amount\": 10\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -91,7 +91,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n        {\r\n            \"Name\": \"Libro 1\",\r\n            \"Author\": \"Autor 1\",\r\n            \"Price\": 10,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 1\",\r\n            \"Author\": \"Autor 2\",\r\n            \"Price\": 15,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Novela 2\",\r\n            \"Author\": \"Autor 3\",\r\n            \"Price\": 20,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 2\",\r\n            \"Author\": \"Autor 4\",\r\n            \"Price\": 12,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 3\",\r\n            \"Author\": \"Autor 5\",\r\n            \"Price\": 18,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 3\",\r\n            \"Author\": \"Autor 6\",\r\n            \"Price\": 11,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 4\",\r\n            \"Author\": \"Autor 7\",\r\n            \"Price\": 17,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 4\",\r\n            \"Author\": \"Autor 8\",\r\n            \"Price\": 9,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Novela 5\",\r\n            \"Author\": \"Autor 9\",\r\n            \"Price\": 16,\r\n            \"Type\": 1\r\n        },\r\n        {\r\n            \"Name\": \"Libro 5\",\r\n            \"Author\": \"Autor 10\",\r\n            \"Price\": 13,\r\n            \"Type\": 0\r\n        },\r\n        {\r\n            \"Name\": \"Libro 11\",\r\n            \"Author\": \"Autor 8\",\r\n            \"Price\": 13,\r\n            \"Type\": 0\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n        {\r\n            \"Id\": 2,\r\n            \"Amount\": 20\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -117,7 +117,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"Budget\":300,\r\n    \"ClientCopies\": {\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n            {\r\n                \"Name\": \"Libro 1\",\r\n                \"Author\": \"Autor 1\",\r\n                \"Price\": 10,\r\n                \"Type\": 0\r\n            },\r\n            {\r\n                \"Name\": \"Novela 1\",\r\n                \"Author\": \"Autor 2\",\r\n                \"Price\": 15,\r\n                \"Type\": 1\r\n            },\r\n            {\r\n                \"Name\": \"Novela 2\",\r\n                \"Author\": \"Autor 3\",\r\n                \"Price\": 20,\r\n                \"Type\": 1\r\n            },\r\n            {\r\n                \"Name\": \"Libro 2\",\r\n                \"Author\": \"Autor 4\",\r\n                \"Price\": 12,\r\n                \"Type\": 0\r\n            },\r\n            {\r\n                \"Name\": \"Novela 3\",\r\n                \"Author\": \"Autor 5\",\r\n                \"Price\": 18,\r\n                \"Type\": 1\r\n            },\r\n            {\r\n                \"Name\": \"Libro 3\",\r\n                \"Author\": \"Autor 6\",\r\n                \"Price\": 11,\r\n                \"Type\": 0\r\n            },\r\n            {\r\n                \"Name\": \"Novela 4\",\r\n                \"Author\": \"Autor 7\",\r\n                \"Price\": 17,\r\n                \"Type\": 1\r\n            },\r\n            {\r\n                \"Name\": \"Libro 4\",\r\n                \"Author\": \"Autor 8\",\r\n                \"Price\": 9,\r\n                \"Type\": 0\r\n            },\r\n            {\r\n                \"Name\": \"Novela 5\",\r\n                \"Author\": \"Autor 9\",\r\n                \"Price\": 16,\r\n                \"Type\": 1\r\n            },\r\n            {\r\n                \"Name\": \"Libro 5\",\r\n                \"Author\": \"Autor 10\",\r\n                \"Price\": 13,\r\n                \"Type\": 0\r\n            }\r\n        ]\r\n    }\r\n}",
+					"raw": "{\r\n    \"Budget\":500,\r\n    \"ClientCopies\": {\r\n    \"AntiquityYears\":0,\r\n    \"Copies\": [\r\n            {\r\n                \"Id\": 2\r\n            },\r\n            {\r\n                \"Id\": 1\r\n            },\r\n            {\r\n                \"Id\": 6\r\n            }\r\n        ]\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
