@@ -34,6 +34,8 @@ namespace LibraryQuotes.Services.Tests
                                 .ReturnsAsync((ClientDTO)null);
 
             Assert.Throws<ArgumentException>(() => _budgetService.CalculateBudgetAndConvertToClientDTO(payload2));
+
+            _getCopiesService.Verify(service => service.GetCopiesByIdAsync(It.IsAny<ClientListIdDTO>()), Times.Once);
         }
 
         [Fact]
@@ -89,6 +91,8 @@ namespace LibraryQuotes.Services.Tests
             Assert.Equal(copiesEntity.Total, result.Total);
             Assert.Equal(copiesEntity.TotalDiscount, result.TotalDiscount);
             Assert.Equal(copiesEntity, result);
+
+            _quoteListService.Verify(service => service.CalculatePriceListCopies(It.IsAny<ClientDTO>()), Times.AtLeastOnce);
         }
 
         [Fact]
@@ -133,6 +137,8 @@ namespace LibraryQuotes.Services.Tests
                                  .Returns(copiesEntity);
 
             Assert.Throws<ArgumentException>(() => _budgetService.CalculateBudget(payload, budget));
+
+            _quoteListService.Verify(service => service.CalculatePriceListCopies(It.IsAny<ClientDTO>()), Times.AtLeastOnce);
         }
 
         [Fact]
@@ -171,7 +177,8 @@ namespace LibraryQuotes.Services.Tests
                                  .Returns(copiesEntity);
 
             Assert.Throws<ArgumentException>(() => _budgetService.CalculateBudget(payload, budget));
-        }
 
+            _quoteListService.Verify(service => service.CalculatePriceListCopies(It.IsAny<ClientDTO>()), Times.Once);
+        }
     }
 }

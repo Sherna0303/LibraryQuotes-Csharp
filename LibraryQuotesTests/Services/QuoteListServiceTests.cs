@@ -31,6 +31,9 @@ namespace LibraryQuotes.Services.Tests
                                 .ReturnsAsync((ClientDTO)null);
 
             Assert.Throws<ArgumentException>(() => quoteListService.CalculatePriceListCopiesAndConvertToClientDTO(payload));
+
+            getCopiesServiceMock.Verify(service => service.GetCopiesByIdAndAmountAsync(It.IsAny<ClientListAndAmountDTO>()), Times.Once);
+
         }
 
         [Fact]
@@ -78,6 +81,8 @@ namespace LibraryQuotes.Services.Tests
             Assert.Equal(total, result.Total);
             Assert.Equal(discount, result.TotalDiscount);
             Assert.Equal(copyEntities, result.Copies);
+
+            _copyFactory.Verify(factory => factory.Create(It.IsAny<CopyDTO>()), Times.Exactly(2));
         }
 
         [Fact]
@@ -128,6 +133,8 @@ namespace LibraryQuotes.Services.Tests
                 Assert.Equal(copyEntities[i].Author, result.Copies[i].Author);
                 Assert.Equal(copyEntities[i].Price, result.Copies[i].Price);
             }
+
+            _copyFactory.Verify(factory => factory.Create(It.IsAny<CopyDTO>()), Times.Exactly(12));
         }
 
         [Fact]
@@ -175,6 +182,9 @@ namespace LibraryQuotes.Services.Tests
             Assert.Equal(total, result.Total);
             Assert.Equal(discount, result.TotalDiscount);
             Assert.Equal(copyEntities, result.Copies);
+
+            _copyFactory.Verify(factory => factory.Create(It.IsAny<CopyDTO>()), Times.Exactly(2));
+
         }
 
         [Fact]
@@ -222,6 +232,8 @@ namespace LibraryQuotes.Services.Tests
             Assert.Equal(total, result.Total);
             Assert.Equal(discount, result.TotalDiscount);
             Assert.Equal(copyEntities, result.Copies);
+
+            _copyFactory.Verify(factory => factory.Create(It.IsAny<CopyDTO>()), Times.Exactly(2));
         }
     }
 }

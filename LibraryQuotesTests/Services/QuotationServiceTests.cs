@@ -135,6 +135,10 @@ namespace LibraryQuotes.Services.Tests
             var result = await _quotationService.CalculatePrice(copyDTO);
 
             Assert.Null(result);
+
+            _databaseMock.Verify(database => database.copy.AddAsync(It.IsAny<Copy>(), default), Times.Once);
+            _databaseMock.Verify(database => database.SaveAsync(), Times.Once);
+            _copyFactory.Verify(factory => factory.Create(It.IsAny<CopyDTO>()), Times.Once);
         }
 
         [Fact]
@@ -155,6 +159,10 @@ namespace LibraryQuotes.Services.Tests
 
             Assert.NotNull(result);
             Assert.Equal(copyDTO.Type, result.Type);
+
+            _databaseMock.Verify(database => database.copy.AddAsync(It.IsAny<Copy>(), default), Times.Once);
+            _databaseMock.Verify(database => database.SaveAsync(), Times.Once);
+            _copyFactory.Verify(factory => factory.Create(It.IsAny<CopyDTO>()), Times.Once);
         }
     }
 }
