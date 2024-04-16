@@ -1,10 +1,6 @@
 ﻿using LibraryQuotes.Models.DTOS.User;
 using LibraryQuotes.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace LibraryQuotes.Controllers
 {
@@ -13,11 +9,13 @@ namespace LibraryQuotes.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ILoginService _loginService;
+        private readonly IRegisterService _registerService;
         private readonly ICreateToken _createToken;
 
-        public AuthController(ILoginService loginService, ICreateToken createToken)
+        public AuthController(ILoginService loginService, IRegisterService registerService ,ICreateToken createToken)
         {
             _loginService = loginService;
+            _registerService = registerService;
             _createToken = createToken;
         }
 
@@ -36,6 +34,19 @@ namespace LibraryQuotes.Controllers
             return Ok(new { token = jwtToken });
         }
 
-        
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(UserRegisterDTO userRegisterDTO)
+        {
+            var user = await _registerService.RegisterUser(userRegisterDTO);
+
+            if (user is null)
+            {
+                return BadRequest(new { message = "Error" });
+            }
+
+            string jwtToken = _createToken.GenerateToken(new UserDTO() { Email = user.Email, Password = user.Password});
+
+            return Ok(new { token = jwtToken });
+        }
     }
 }
