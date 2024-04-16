@@ -3,10 +3,12 @@ using LibraryQuotes.Models.DTOS.Budget;
 using LibraryQuotes.Models.DTOS.Quoation;
 using LibraryQuotes.Models.DTOS.QuoteList;
 using LibraryQuotes.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryQuotes.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class QuotesController : ControllerBase
