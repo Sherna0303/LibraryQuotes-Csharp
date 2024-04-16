@@ -7,9 +7,12 @@ using LibraryQuotes.Models.DTOS.QuoteList;
 using LibraryQuotes.Models.Factories;
 using LibraryQuotes.Services;
 using LibraryQuotes.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +29,17 @@ builder.Services.AddScoped<IValidator<ClientListAndAmountDTO>, ClientListAndAmou
 builder.Services.AddScoped<IValidator<BudgetClientDTO>, BudgetClientValidator>();
 builder.Services.AddScoped<IGetCopiesService, GetCopiesService>();
 builder.Services.AddScoped <ILoginService, LoginService>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -56,6 +70,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
