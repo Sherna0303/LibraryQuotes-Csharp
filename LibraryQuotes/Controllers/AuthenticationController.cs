@@ -1,4 +1,4 @@
-﻿using LibraryQuotes.Models.DTOS;
+﻿using LibraryQuotes.Models.DTOS.User;
 using LibraryQuotes.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -13,12 +13,12 @@ namespace LibraryQuotes.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ILoginService _loginService;
-        private readonly IConfiguration _configuration;
+        private readonly ICreateToken _createToken;
 
-        public AuthController(ILoginService loginService, IConfiguration configuration)
+        public AuthController(ILoginService loginService, ICreateToken createToken)
         {
             _loginService = loginService;
-            _configuration = configuration;
+            _createToken = createToken;
         }
 
         [HttpPost("login")]
@@ -31,31 +31,11 @@ namespace LibraryQuotes.Controllers
                 return BadRequest(new { message = "Credenciales invalidas" });
             }
 
-            string jwtToken = GenerateToken(userDTO);
+            string jwtToken = _createToken.GenerateToken(userDTO);
 
             return Ok(new { token = jwtToken });
         }
 
-        private string GenerateToken(UserDTO user)
-        {
-            var claims = new[]
-            {
-                new Claim(ClaimTypes.Name, user.Name),
-                new Claim(ClaimTypes.Email, user.Email)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("JWT:Key").Value));
-            var credencial = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var securityToken = new JwtSecurityToken(
-                                claims: claims,
-                                expires: DateTime.Now.AddMinutes(5),
-                                signingCredentials: credencial
-                                );
-            
-            string token = new JwtSecurityTokenHandler().WriteToken(securityToken);
-
-            return token;
-        }
+        
     }
 }

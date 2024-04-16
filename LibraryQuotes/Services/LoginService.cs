@@ -1,5 +1,5 @@
 ﻿using LibraryQuotes.Models.DataBase.Interfaces;
-using LibraryQuotes.Models.DTOS;
+using LibraryQuotes.Models.DTOS.User;
 using LibraryQuotes.Models.Persistence;
 using LibraryQuotes.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
