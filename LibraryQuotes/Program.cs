@@ -25,6 +25,7 @@ builder.Services.AddScoped<IValidator<CopyDTO>, CopyValidator>();
 builder.Services.AddScoped<IValidator<ClientListAndAmountDTO>, ClientListAndAmountValidator>();
 builder.Services.AddScoped<IValidator<BudgetClientDTO>, BudgetClientValidator>();
 builder.Services.AddScoped<IGetCopiesService, GetCopiesService>();
+builder.Services.AddScoped <ILoginService, LoginService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
