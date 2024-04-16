@@ -10,18 +10,18 @@ namespace LibraryQuotes.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class LoginController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly ILoginService _loginService;
         private readonly IConfiguration _configuration;
 
-        public LoginController(ILoginService loginService, IConfiguration configuration)
+        public AuthController(ILoginService loginService, IConfiguration configuration)
         {
             _loginService = loginService;
             _configuration = configuration;
         }
 
-        [HttpPost("authenticate")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(UserDTO userDTO)
         {
             var user = await _loginService.GetUser(userDTO);
