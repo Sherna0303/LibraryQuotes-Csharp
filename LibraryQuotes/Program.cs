@@ -29,6 +29,7 @@ builder.Services.AddScoped<IValidator<ClientListAndAmountDTO>, ClientListAndAmou
 builder.Services.AddScoped<IValidator<BudgetClientDTO>, BudgetClientValidator>();
 builder.Services.AddScoped<IGetCopiesService, GetCopiesService>();
 builder.Services.AddScoped <ILoginService, LoginService>();
+builder.Services.AddScoped <IRegisterService, RegisterService>();
 builder.Services.AddScoped <ICreateToken, CreateToken>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
