@@ -33,7 +33,7 @@ namespace LibraryQuotes.Services
                 Name = user.Name,
                 Email = user.Email,
                 Password = HashPassword(user.Password),
-                AntiquityYears = DateOnly.FromDateTime(DateTime.Now)
+                CreationDate = DateOnly.FromDateTime(DateTime.Now)
             };
 
             await _database.users.AddAsync(userDb);

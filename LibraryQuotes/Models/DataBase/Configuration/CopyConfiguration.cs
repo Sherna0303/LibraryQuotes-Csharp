@@ -20,7 +20,7 @@ namespace LibraryQuotes.Models.DataBase.Configuration
             entityBuilder.Property(entity => entity.Name).IsRequired();
             entityBuilder.Property(entity => entity.Email).IsRequired();
             entityBuilder.Property(entity => entity.Password).IsRequired();
-            entityBuilder.Property(entity => entity.AntiquityYears).IsRequired();
+            entityBuilder.Property(entity => entity.CreationDate).IsRequired();
         }
     }
 }

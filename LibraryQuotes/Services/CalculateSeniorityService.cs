@@ -26,7 +26,7 @@ namespace LibraryQuotes.Services
             }
 
             var user = _database.users.FindAsync(id).Result;
-            return CalculateAntiquityYears(user.AntiquityYears);
+            return CalculateAntiquityYears(user.CreationDate);
         }
 
         private int CalculateAntiquityYears(DateOnly date)
