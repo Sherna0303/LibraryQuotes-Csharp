@@ -28,7 +28,6 @@ namespace LibraryQuotes.Services
             {
                 new Claim("UserId", userData.UserId.ToString()),
                 new Claim(ClaimTypes.Name, userData.Name),
-                new Claim(ClaimTypes.Email, user.Email)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("JWT:Key").Value));
