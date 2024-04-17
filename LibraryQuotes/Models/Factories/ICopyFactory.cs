@@ -1,10 +1,10 @@
-﻿using LibraryQuotes.Models.DTOS;
+﻿using LibraryQuotes.Models.DTOS.Quoation;
 using LibraryQuotes.Models.Entities;
 
 namespace LibraryQuotes.Models.Factories
 {
     public interface ICopyFactory
     {
-        Copy Create(CopyDTO payload);
+        CopyEntity Create(CopyDTO payload);
     }
 }

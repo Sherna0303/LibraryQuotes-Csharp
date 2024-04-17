@@ -1,6 +1,7 @@
-﻿using LibraryQuotes.Models.Enums;
+﻿using FluentValidation;
+using LibraryQuotes.Models.DTOS.Quoation;
 
-namespace LibraryQuotes.Models.DTOS
+namespace LibraryQuotes.Models.DTOS.QuoteList
 {
     public class ClientDTO
     {

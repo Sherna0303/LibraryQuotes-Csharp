@@ -1,6 +1,6 @@
 ﻿namespace LibraryQuotes.Models.Entities
 {
-    public abstract class Copy
+    public abstract class CopyEntity
     {
         public string Name { get; set; }
         public string Author { get; set; }
@@ -9,11 +9,11 @@
         public float TotalPrice { get; set; }
         protected float INCREASE_PRICE = 0;
 
-        protected Copy()
+        protected CopyEntity()
         {
         }
 
-        protected Copy(string name, string author, float price, float discount)
+        protected CopyEntity(string name, string author, float price, float discount)
         {
             Name = name;
             Author = author;
@@ -21,12 +21,13 @@
             Discount = discount;
         }
 
-        public abstract float CalculateIncrease(float RETAIL_INCREASE);
+        public abstract float CalculateIncrease();
+        public abstract float CalculateIncreaseDetal(float RETAIL_INCREASE);
 
         public float CalculateDiscount(int AntiquityYears)
         {
             float DISCOUNT_ANTIQUITY = ValidateAntiquityDiscount(AntiquityYears);
-            Discount += Price * DISCOUNT_ANTIQUITY;
+            Discount = Math.Max(Discount, Price * DISCOUNT_ANTIQUITY);
             TotalPrice = Price - Discount;
             return Discount;
         }
@@ -41,7 +42,8 @@
         private float ValidateWholesaleDiscount(int count)
         {
             const float WHOLESALE_DISCOUNT = 0.15f;
-            return (count - 10) * WHOLESALE_DISCOUNT / 100;
+            float discount = (count - 10) * WHOLESALE_DISCOUNT / 100;
+            return (discount < 1) ? discount : 1f;
         }
 
         private float ValidateAntiquityDiscount(int years)
