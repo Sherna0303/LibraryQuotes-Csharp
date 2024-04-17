@@ -4,6 +4,7 @@ using LibraryQuotes.Models.DataBase.Interfaces;
 using LibraryQuotes.Models.DTOS.Budget;
 using LibraryQuotes.Models.DTOS.Quoation;
 using LibraryQuotes.Models.DTOS.QuoteList;
+using LibraryQuotes.Models.DTOS.User;
 using LibraryQuotes.Models.Factories;
 using LibraryQuotes.Services;
 using LibraryQuotes.Services.Interfaces;
@@ -27,8 +28,12 @@ builder.Services.AddScoped<IDatabase, Database>();
 builder.Services.AddScoped<IValidator<CopyDTO>, CopyValidator>();
 builder.Services.AddScoped<IValidator<ClientListAndAmountDTO>, ClientListAndAmountValidator>();
 builder.Services.AddScoped<IValidator<BudgetClientDTO>, BudgetClientValidator>();
+builder.Services.AddScoped<IValidator<UserDTO>, UserValidator>();
+builder.Services.AddScoped<IValidator<UserRegisterDTO>, UserRegisterValidator>();
 builder.Services.AddScoped<IGetCopiesService, GetCopiesService>();
 builder.Services.AddScoped <ILoginService, LoginService>();
+builder.Services.AddScoped <IRegisterService, RegisterService>();
+builder.Services.AddScoped <ICreateToken, CreateToken>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {

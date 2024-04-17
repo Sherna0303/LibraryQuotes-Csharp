@@ -8,19 +8,42 @@ using System.Text;
 
 namespace LibraryQuotes.Services
 {
-    public class LoginService : ILoginService
+    public class RegisterService : IRegisterService
     {
         private readonly IDatabase _database;
 
-        public LoginService(IDatabase database)
+        public RegisterService(IDatabase database)
         {
             _database = database;
         }
 
-        public async Task<Users?> GetUser(UserDTO user)
+        public async Task<Users?> RegisterUser(UserRegisterDTO user)
         {
-            return await _database.users
-                .SingleOrDefaultAsync(x => x.Email == user.Email && x.Password == HashPassword(user.Password));
+            bool AlreadyRegistered = await _database.users
+                .AnyAsync(x => x.Email == user.Email); ;
+
+            if (AlreadyRegistered)
+            {
+                return null;
+            }
+
+
+            var userDb = new Users()
+            {
+                Name = user.Name,
+                Email = user.Email,
+                Password = HashPassword(user.Password),
+                AntiquityYears = DateOnly.FromDateTime(DateTime.Now)
+            };
+
+            await _database.users.AddAsync(userDb);
+
+            if (!await _database.SaveAsync())
+            {
+                return null;
+            }
+
+            return userDb;
         }
 
         private string HashPassword(string password)

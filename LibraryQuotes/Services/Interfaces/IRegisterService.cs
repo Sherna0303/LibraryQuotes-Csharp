@@ -3,8 +3,8 @@ using LibraryQuotes.Models.Persistence;
 
 namespace LibraryQuotes.Services.Interfaces
 {
-    public interface ILoginService
+    public interface IRegisterService
     {
-        Task<Users> GetUser(UserDTO user);
+        Task<Users?> RegisterUser(UserRegisterDTO user);
     }
 }
