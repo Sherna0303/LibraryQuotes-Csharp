@@ -32,7 +32,7 @@ namespace LibraryQuotes.Services
                 copies.AddRange(ConvertToCopyDTOs(copy, item.Amount));
             }
 
-            return new ClientDTO { AntiquityYears = payload.AntiquityYears, Copies = copies};
+            return new ClientDTO { Copies = copies };
         }
 
         public async Task<ClientDTO> GetCopiesByIdAsync(ClientListIdDTO payload)
@@ -51,7 +51,7 @@ namespace LibraryQuotes.Services
                 copies.AddRange(ConvertToCopyDTOs(copy, 1));
             }
 
-            return new ClientDTO { AntiquityYears = payload.AntiquityYears, Copies = copies };
+            return new ClientDTO { Copies = copies };
         }
 
         private List<CopyDTO> ConvertToCopyDTOs(Copy copy, int amount)

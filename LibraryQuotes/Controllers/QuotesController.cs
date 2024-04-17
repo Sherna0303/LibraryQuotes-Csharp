@@ -5,6 +5,7 @@ using LibraryQuotes.Models.DTOS.QuoteList;
 using LibraryQuotes.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace LibraryQuotes.Controllers
 {
@@ -58,7 +59,7 @@ namespace LibraryQuotes.Controllers
             try
             {
                 return StatusCode(StatusCodes.Status200OK, await _quotationService.CalculatePrice(payload));
-            }
+            } 
             catch (ArgumentException ex)
             {
                 return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
@@ -72,6 +73,7 @@ namespace LibraryQuotes.Controllers
         public async Task<IActionResult> CalculateListCopyPrice(ClientListAndAmountDTO payload)
         {
             var validateClient = await _clientValidator.ValidateAsync(payload);
+            var UserId = User.FindFirst("UserId")?.Value;
 
             if (!validateClient.IsValid)
             {
@@ -80,7 +82,7 @@ namespace LibraryQuotes.Controllers
 
             try
             {
-                return StatusCode(StatusCodes.Status200OK, _quoteListService.CalculatePriceListCopiesAndConvertToClientDTO(payload));
+                return StatusCode(StatusCodes.Status200OK, _quoteListService.CalculatePriceListCopiesAndConvertToClientDTO(payload, UserId));
             }
             catch (ArgumentException ex)
             {
@@ -95,6 +97,7 @@ namespace LibraryQuotes.Controllers
         public async Task<IActionResult> CalculateBudget(BudgetClientDTO payload)
         {
             var validateBudget = await _budgetClientValidator.ValidateAsync(payload);
+            var UserId = User.FindFirst("UserId")?.Value;
 
             if (!validateBudget.IsValid)
             {
@@ -103,7 +106,7 @@ namespace LibraryQuotes.Controllers
 
             try
             {
-                return StatusCode(StatusCodes.Status200OK, _budgetService.CalculateBudgetAndConvertToClientDTO(payload));
+                return StatusCode(StatusCodes.Status200OK, _budgetService.CalculateBudgetAndConvertToClientDTO(payload, UserId));
             }
             catch (ArgumentException ex)
             {
