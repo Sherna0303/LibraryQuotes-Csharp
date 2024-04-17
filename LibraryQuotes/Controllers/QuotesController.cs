@@ -97,6 +97,7 @@ namespace LibraryQuotes.Controllers
         public async Task<IActionResult> CalculateBudget(BudgetClientDTO payload)
         {
             var validateBudget = await _budgetClientValidator.ValidateAsync(payload);
+            var UserId = User.FindFirst("UserId")?.Value;
 
             if (!validateBudget.IsValid)
             {
@@ -105,7 +106,7 @@ namespace LibraryQuotes.Controllers
 
             try
             {
-                return StatusCode(StatusCodes.Status200OK, _budgetService.CalculateBudgetAndConvertToClientDTO(payload));
+                return StatusCode(StatusCodes.Status200OK, _budgetService.CalculateBudgetAndConvertToClientDTO(payload, UserId));
             }
             catch (ArgumentException ex)
             {

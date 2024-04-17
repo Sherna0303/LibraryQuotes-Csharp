@@ -11,14 +11,16 @@ namespace LibraryQuotes.Services
     {
         private readonly IQuoteListService _quoteListService;
         private readonly IGetCopiesService _getCopiesService;
+        private readonly ICalculateSeniorityService _calculateSeniorityService;
 
-        public BudgetService(IQuoteListService quoteListService, IGetCopiesService getCopiesService)
+        public BudgetService(IQuoteListService quoteListService, IGetCopiesService getCopiesService, ICalculateSeniorityService calculateSeniorityService)
         {
             _quoteListService = quoteListService;
             _getCopiesService = getCopiesService;
+            _calculateSeniorityService = calculateSeniorityService;
         }
 
-        public ListCopiesEntity CalculateBudgetAndConvertToClientDTO(BudgetClientDTO payload)
+        public ListCopiesEntity CalculateBudgetAndConvertToClientDTO(BudgetClientDTO payload, string idUser)
         {
             var copiesDTO = _getCopiesService.GetCopiesByIdAsync(payload.ClientCopies).Result;
 
@@ -26,6 +28,8 @@ namespace LibraryQuotes.Services
             {
                 throw new ArgumentException("The copy id does not exist in the database");
             }
+
+            copiesDTO.AntiquityYears = _calculateSeniorityService.GetSeniority(idUser);
 
             return CalculateBudget(copiesDTO, payload.Budget);
         }
