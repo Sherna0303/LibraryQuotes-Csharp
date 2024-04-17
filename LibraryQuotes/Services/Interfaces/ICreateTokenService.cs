@@ -2,7 +2,7 @@
 
 namespace LibraryQuotes.Services.Interfaces
 {
-    public interface ICreateToken
+    public interface ICreateTokenService
     {
         Task<string> GenerateToken(UserDTO user);
     }

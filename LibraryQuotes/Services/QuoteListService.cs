@@ -69,5 +69,14 @@ namespace LibraryQuotes.Services
 
             return count > 1 && count <= 10 ? RETAIL_INCREASE : 1;
         }
+
+        private int CalculateAntiquityYears(DateOnly date)
+        {
+            var today = DateTime.Now;
+            var JoinDate = new DateTime(date.Year, date.Month, date.Day);
+            TimeSpan totalDays = today - JoinDate;
+
+            return totalDays.Days / 365;
+        }
     }
 }

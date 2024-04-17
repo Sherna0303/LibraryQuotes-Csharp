@@ -33,7 +33,7 @@ builder.Services.AddScoped<IValidator<UserRegisterDTO>, UserRegisterValidator>()
 builder.Services.AddScoped<IGetCopiesService, GetCopiesService>();
 builder.Services.AddScoped <ILoginService, LoginService>();
 builder.Services.AddScoped <IRegisterService, RegisterService>();
-builder.Services.AddScoped <ICreateToken, CreateToken>();
+builder.Services.AddScoped <ICreateTokenService, CreateTokenService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {

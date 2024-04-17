@@ -9,12 +9,12 @@ using System.Text;
 
 namespace LibraryQuotes.Services
 {
-    public class CreateToken : ICreateToken
+    public class CreateTokenService : ICreateTokenService
     {
         private readonly IConfiguration _configuration;
         private readonly IDatabase _database;
 
-        public CreateToken(IConfiguration configuration, IDatabase database)
+        public CreateTokenService(IConfiguration configuration, IDatabase database)
         {
             _configuration = configuration;
             _database = database;
@@ -26,6 +26,7 @@ namespace LibraryQuotes.Services
 
             var claims = new[]
             {
+                new Claim("UserId", userData.UserId.ToString()),
                 new Claim(ClaimTypes.Name, userData.Name),
                 new Claim(ClaimTypes.Email, user.Email)
             };

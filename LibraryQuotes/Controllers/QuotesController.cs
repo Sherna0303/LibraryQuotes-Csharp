@@ -58,7 +58,7 @@ namespace LibraryQuotes.Controllers
             try
             {
                 return StatusCode(StatusCodes.Status200OK, await _quotationService.CalculatePrice(payload));
-            } 
+            }
             catch (ArgumentException ex)
             {
                 return StatusCode(StatusCodes.Status400BadRequest, ex.Message);

@@ -12,11 +12,11 @@ namespace LibraryQuotes.Controllers
     {
         private readonly ILoginService _loginService;
         private readonly IRegisterService _registerService;
-        private readonly ICreateToken _createToken;
+        private readonly ICreateTokenService _createToken;
         private readonly IValidator<UserDTO> _userValidator;
         private readonly IValidator<UserRegisterDTO> _userRegisterValidator;
 
-        public AuthController(ILoginService loginService, IRegisterService registerService ,ICreateToken createToken, IValidator<UserDTO> userValidator, IValidator<UserRegisterDTO> userRegisterValidator)
+        public AuthController(ILoginService loginService, IRegisterService registerService ,ICreateTokenService createToken, IValidator<UserDTO> userValidator, IValidator<UserRegisterDTO> userRegisterValidator)
         {
             _loginService = loginService;
             _registerService = registerService;
