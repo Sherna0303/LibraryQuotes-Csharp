@@ -42,7 +42,7 @@ namespace LibraryQuotes.Controllers
                 return BadRequest(new { message = "Credenciales invalidas" });
             }
 
-            string jwtToken = _createToken.GenerateToken(userDTO);
+            string jwtToken = await _createToken.GenerateToken(userDTO);
 
             return Ok(new { token = jwtToken });
         }
@@ -64,7 +64,7 @@ namespace LibraryQuotes.Controllers
                 return BadRequest(new { message = "Error" });
             }
 
-            string jwtToken = _createToken.GenerateToken(new UserDTO() { Email = user.Email, Password = user.Password});
+            string jwtToken = await _createToken.GenerateToken(new UserDTO() { Email = user.Email, Password = user.Password});
 
             return Ok(new { token = jwtToken });
         }

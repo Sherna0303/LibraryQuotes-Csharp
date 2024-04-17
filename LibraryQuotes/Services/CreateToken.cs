@@ -1,6 +1,7 @@
-﻿using LibraryQuotes.Models.DTOS.User;
+﻿using LibraryQuotes.Models.DataBase.Interfaces;
+using LibraryQuotes.Models.DTOS.User;
 using LibraryQuotes.Services.Interfaces;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -11,16 +12,21 @@ namespace LibraryQuotes.Services
     public class CreateToken : ICreateToken
     {
         private readonly IConfiguration _configuration;
+        private readonly IDatabase _database;
 
-        public CreateToken(IConfiguration configuration)
+        public CreateToken(IConfiguration configuration, IDatabase database)
         {
             _configuration = configuration;
+            _database = database;
         }
 
-        public string GenerateToken(UserDTO user)
+        public async Task<string> GenerateToken(UserDTO user)
         {
+            var userData = await _database.users.FirstOrDefaultAsync(u => u.Email == user.Email);
+
             var claims = new[]
             {
+                new Claim(ClaimTypes.Name, userData.Name),
                 new Claim(ClaimTypes.Email, user.Email)
             };
 
