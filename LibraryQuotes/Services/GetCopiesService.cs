@@ -4,6 +4,7 @@ using LibraryQuotes.Models.DTOS.Quoation;
 using LibraryQuotes.Models.DTOS.QuoteList;
 using LibraryQuotes.Models.Persistence;
 using LibraryQuotes.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryQuotes.Services
 {
@@ -52,6 +53,18 @@ namespace LibraryQuotes.Services
             }
 
             return new ClientDTO { Copies = copies };
+        }
+
+        public async Task<List<Copy>> GetAllCopies()
+        {
+            var copies = await _database.copy.ToListAsync();
+
+            if (copies is null)
+            {
+                return null;
+            }
+
+            return copies;
         }
 
         private List<CopyDTO> ConvertToCopyDTOs(Copy copy, int amount)
