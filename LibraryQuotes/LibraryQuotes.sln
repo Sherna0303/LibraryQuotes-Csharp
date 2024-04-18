@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryQuotes", "LibraryQuotes.csproj", "{A0341783-F018-466A-811A-5BB953EA8529}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryQuotesTests", "..\LibraryQuotesTests\LibraryQuotesTests.csproj", "{E2A7F258-E1B8-43E6-AE10-023562AC8920}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryQuotesTests", "..\LibraryQuotesTests\LibraryQuotesTests.csproj", "{E2A7F258-E1B8-43E6-AE10-023562AC8920}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
