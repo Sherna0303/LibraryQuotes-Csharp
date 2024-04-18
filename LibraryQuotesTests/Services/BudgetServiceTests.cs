@@ -12,13 +12,15 @@ namespace LibraryQuotes.Services.Tests
     {
         private readonly Mock<IQuoteListService> _quoteListService;
         private readonly Mock<IGetCopiesService> _getCopiesService;
+        private readonly Mock<ICalculateSeniorityService> _calculateSeniorityService;
         private readonly IBudgetService _budgetService;
 
         public BudgetServiceTests()
         {
             _quoteListService = new Mock<IQuoteListService>();
             _getCopiesService = new Mock<IGetCopiesService>();
-            _budgetService = new BudgetService(_quoteListService.Object, _getCopiesService.Object);
+            _calculateSeniorityService = new Mock<ICalculateSeniorityService>();
+            _budgetService = new BudgetService(_quoteListService.Object, _getCopiesService.Object, _calculateSeniorityService.Object);
         }
 
         [Fact]
@@ -28,12 +30,12 @@ namespace LibraryQuotes.Services.Tests
             var payload2 = new BudgetClientDTO();
 
             var getCopiesServiceMock = new Mock<IGetCopiesService>();
-            var quoteListService = new QuoteListService(null, getCopiesServiceMock.Object);
+            var quoteListService = new QuoteListService(null, getCopiesServiceMock.Object, _calculateSeniorityService.Object);
 
             _getCopiesService.Setup(service => service.GetCopiesByIdAsync(payload))
                                 .ReturnsAsync((ClientDTO)null);
 
-            Assert.Throws<ArgumentException>(() => _budgetService.CalculateBudgetAndConvertToClientDTO(payload2));
+            Assert.Throws<ArgumentException>(() => _budgetService.CalculateBudgetAndConvertToClientDTO(payload2, ""));
 
             _getCopiesService.Verify(service => service.GetCopiesByIdAsync(It.IsAny<ClientListIdDTO>()), Times.Once);
         }

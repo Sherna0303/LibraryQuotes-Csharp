@@ -1,8 +1,7 @@
-﻿using LibraryQuotes.Models.DataBase.Interfaces;
-using LibraryQuotes.Models.DTOS.User;
+﻿using LibraryQuotes.Models.DTOS.User;
 using LibraryQuotes.Models.Persistence;
+using LibraryQuotes.Repository.User;
 using LibraryQuotes.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -10,17 +9,16 @@ namespace LibraryQuotes.Services
 {
     public class LoginService : ILoginService
     {
-        private readonly IDatabase _database;
+        private readonly IUserRepository _userRepository;
 
-        public LoginService(IDatabase database)
+        public LoginService(IUserRepository userRepository)
         {
-            _database = database;
+            _userRepository = userRepository;
         }
 
         public async Task<Users?> GetUser(UserDTO user)
         {
-            return await _database.users
-                .SingleOrDefaultAsync(x => x.Email == user.Email && x.Password == HashPassword(user.Password));
+            return await _userRepository.VerifyAuthentication(user.Email, HashPassword(user.Password));
         }
 
         private string HashPassword(string password)

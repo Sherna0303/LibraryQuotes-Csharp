@@ -12,11 +12,13 @@ namespace LibraryQuotes.Services.Tests
     {
         private readonly Mock<ICopyFactory> _copyFactory;
         private readonly IQuoteListService _quoteListService;
+        private readonly Mock<ICalculateSeniorityService> _calculateSeniorityService;
 
         public QuoteListServiceTests()
         {
             _copyFactory = new Mock<ICopyFactory>();
-            _quoteListService = new QuoteListService(_copyFactory.Object, null);
+            _calculateSeniorityService = new Mock<ICalculateSeniorityService>();
+            _quoteListService = new QuoteListService(_copyFactory.Object, null, _calculateSeniorityService.Object);
         }
 
         [Fact]
@@ -25,12 +27,12 @@ namespace LibraryQuotes.Services.Tests
             var payload = new ClientListAndAmountDTO();
 
             var getCopiesServiceMock = new Mock<IGetCopiesService>();
-            var quoteListService = new QuoteListService(null, getCopiesServiceMock.Object);
+            var quoteListService = new QuoteListService(null, getCopiesServiceMock.Object, _calculateSeniorityService.Object);
 
             getCopiesServiceMock.Setup(service => service.GetCopiesByIdAndAmountAsync(payload))
                                 .ReturnsAsync((ClientDTO)null);
 
-            Assert.Throws<ArgumentException>(() => quoteListService.CalculatePriceListCopiesAndConvertToClientDTO(payload));
+            Assert.Throws<ArgumentException>(() => quoteListService.CalculatePriceListCopiesAndConvertToClientDTO(payload, ""));
 
             getCopiesServiceMock.Verify(service => service.GetCopiesByIdAndAmountAsync(It.IsAny<ClientListAndAmountDTO>()), Times.Once);
 
