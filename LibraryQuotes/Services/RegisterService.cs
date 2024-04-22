@@ -1,6 +1,7 @@
 ﻿using LibraryQuotes.Models.DataBase.Interfaces;
 using LibraryQuotes.Models.DTOS.User;
 using LibraryQuotes.Models.Persistence;
+using LibraryQuotes.Repository.User;
 using LibraryQuotes.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
@@ -10,17 +11,18 @@ namespace LibraryQuotes.Services
 {
     public class RegisterService : IRegisterService
     {
+        private readonly IUserRepository _userRepository;
         private readonly IDatabase _database;
 
-        public RegisterService(IDatabase database)
+        public RegisterService(IUserRepository userRepository, IDatabase database)
         {
+            _userRepository = userRepository;
             _database = database;
         }
 
         public async Task<Users?> RegisterUser(UserRegisterDTO user)
         {
-            bool AlreadyRegistered = await _database.users
-                .AnyAsync(x => x.Email == user.Email); ;
+            bool AlreadyRegistered = await _userRepository.EmailAlreadyRegistered(user.Email);
 
             if (AlreadyRegistered)
             {
@@ -36,7 +38,7 @@ namespace LibraryQuotes.Services
                 CreationDate = DateOnly.FromDateTime(DateTime.Now)
             };
 
-            await _database.users.AddAsync(userDb);
+            await _userRepository.AddUser(userDb);
 
             if (!await _database.SaveAsync())
             {
