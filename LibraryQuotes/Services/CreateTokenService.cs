@@ -34,7 +34,7 @@ namespace LibraryQuotes.Services
 
             var securityToken = new JwtSecurityToken(
                                 claims: claims,
-                                expires: DateTime.Now.AddMinutes(5),
+                                expires: DateTime.Now.AddMinutes(60),
                                 signingCredentials: credencial
                                 );
 

@@ -68,6 +68,17 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+      builder =>
+      {
+          builder.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+      });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -75,6 +86,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 

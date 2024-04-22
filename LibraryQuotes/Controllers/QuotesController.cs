@@ -6,14 +6,12 @@ using LibraryQuotes.Models.Persistence;
 using LibraryQuotes.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Security.Claims;
 
 namespace LibraryQuotes.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class QuotesController : ControllerBase
     {
         private readonly IQuotationService _quotationService;
@@ -32,7 +30,7 @@ namespace LibraryQuotes.Controllers
             _copyValidator = copyValidator;
             _clientValidator = clientValidator;
             _budgetClientValidator = budgetClientValidator;
-            _getCopiesService =getCopiesService;
+            _getCopiesService = getCopiesService;
         }
 
         /// <summary>
@@ -50,7 +48,7 @@ namespace LibraryQuotes.Controllers
         ///         }
         ///
         /// </remarks>
-        [HttpPost("/calculateCopyPrice")]
+        [HttpPost("saveCopy")]
         public async Task<IActionResult> CalculateCopyPrice(CopyDTO payload)
         {
             var validateClient = await _copyValidator.ValidateAsync(payload);
@@ -63,7 +61,7 @@ namespace LibraryQuotes.Controllers
             try
             {
                 return StatusCode(StatusCodes.Status200OK, await _quotationService.CalculatePrice(payload));
-            } 
+            }
             catch (ArgumentException ex)
             {
                 return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
@@ -73,7 +71,7 @@ namespace LibraryQuotes.Controllers
         /// <summary>
         /// Calculate the price of a list of copies
         /// </summary>
-        [HttpPost("/calculateListCopyPrice")]
+        [HttpPost("calculateListCopyPrice")]
         public async Task<IActionResult> CalculateListCopyPrice(ClientListAndAmountDTO payload)
         {
             var validateClient = await _clientValidator.ValidateAsync(payload);
@@ -97,7 +95,7 @@ namespace LibraryQuotes.Controllers
         /// <summary>
         /// Calculate the number of copies to buy with a budget
         /// </summary>
-        [HttpPost("/calculateBudget")]
+        [HttpPost("calculateBudget")]
         public async Task<IActionResult> CalculateBudget(BudgetClientDTO payload)
         {
             var validateBudget = await _budgetClientValidator.ValidateAsync(payload);
@@ -118,7 +116,7 @@ namespace LibraryQuotes.Controllers
             }
         }
 
-        [HttpGet("/GetAllCopies")]
+        [HttpGet("GetAllCopies")]
         public IActionResult GetAllCopies()
         {
             List<Copy> copies = _getCopiesService.GetAllCopies().Result;

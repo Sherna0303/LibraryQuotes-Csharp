@@ -2,6 +2,7 @@
 using LibraryQuotes.Models.DTOS.Quoation;
 using LibraryQuotes.Models.DTOS.User;
 using LibraryQuotes.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryQuotes.Controllers
@@ -67,6 +68,14 @@ namespace LibraryQuotes.Controllers
             string jwtToken = await _createToken.GenerateToken(new UserDTO() { Email = user.Email, Password = user.Password});
 
             return Ok(new { token = jwtToken });
+        }
+
+        
+        [HttpGet("verifyToken")]
+        [Authorize]
+        public IActionResult VerifyToken()
+        {
+            return Ok(new { verify = "OK" });
         }
     }
 }
