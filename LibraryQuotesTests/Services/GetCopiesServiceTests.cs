@@ -25,7 +25,6 @@ namespace LibraryQuotes.Services.Tests
         {
             var payload = new ClientListAndAmountDTO
             {
-                AntiquityYears = 0,
                 Copies = new List<CopyByIdAndAmountDTO>
                 {
                     new CopyByIdAndAmountDTO()
@@ -74,6 +73,8 @@ namespace LibraryQuotes.Services.Tests
             Assert.NotNull(result);
             Assert.Equal(0, result.AntiquityYears);
             Assert.Equivalent(clientDTO, result);
+
+            _databaseMock.Verify(database => database.copy.FindAsync(It.IsAny<int>()), Times.Once);
         }
 
         [Fact]
@@ -81,7 +82,6 @@ namespace LibraryQuotes.Services.Tests
         {
             var payload = new ClientListIdDTO
             {
-                AntiquityYears = 1,
                 Copies = new List<CopyByIdDTO>
                 {
                     new CopyByIdDTO()
@@ -97,7 +97,7 @@ namespace LibraryQuotes.Services.Tests
 
             var clientDTO = new ClientDTO()
             {
-                AntiquityYears = 1,
+                AntiquityYears = 0,
                 Copies = new List<CopyDTO>
                 {
                     new CopyDTO()
@@ -141,8 +141,10 @@ namespace LibraryQuotes.Services.Tests
             var result = await _getCopiesService.GetCopiesByIdAsync(payload);
 
             Assert.NotNull(result);
-            Assert.Equal(1, result.AntiquityYears);
+            Assert.Equal(0, result.AntiquityYears);
             Assert.Equivalent(clientDTO, result);
+
+            _databaseMock.Verify(database => database.copy.FindAsync(It.IsAny<int>()), Times.Exactly(2));
         }
 
         [Fact]
@@ -150,7 +152,6 @@ namespace LibraryQuotes.Services.Tests
         {
             var payload = new ClientListAndAmountDTO
             {
-                AntiquityYears = 0,
                 Copies = new List<CopyByIdAndAmountDTO>
                 {
                     new CopyByIdAndAmountDTO()
@@ -166,6 +167,9 @@ namespace LibraryQuotes.Services.Tests
             var result = await _getCopiesService.GetCopiesByIdAndAmountAsync(payload);
 
             Assert.Null(result);
+
+            _databaseMock.Verify(database => database.copy.FindAsync(It.IsAny<int>()), Times.Once);
+
         }
 
         [Fact]
@@ -173,7 +177,6 @@ namespace LibraryQuotes.Services.Tests
         {
             var payload = new ClientListIdDTO
             {
-                AntiquityYears = 1,
                 Copies = new List<CopyByIdDTO>
                 {
                     new CopyByIdDTO()
@@ -202,6 +205,8 @@ namespace LibraryQuotes.Services.Tests
             var result = await _getCopiesService.GetCopiesByIdAsync(payload);
 
             Assert.Null(result);
+
+            _databaseMock.Verify(database => database.copy.FindAsync(It.IsAny<int>()), Times.Once);
         }
     }
 }

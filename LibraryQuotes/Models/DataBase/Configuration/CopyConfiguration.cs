@@ -13,5 +13,14 @@ namespace LibraryQuotes.Models.DataBase.Configuration
             entityBuilder.Property(entity => entity.Price).IsRequired();
             entityBuilder.Property(entity => entity.Type).IsRequired();
         }
+
+        public CopyConfiguration(EntityTypeBuilder<Users> entityBuilder)
+        {
+            entityBuilder.HasKey(entity => entity.UserId);
+            entityBuilder.Property(entity => entity.Name).IsRequired();
+            entityBuilder.Property(entity => entity.Email).IsRequired();
+            entityBuilder.Property(entity => entity.Password).IsRequired();
+            entityBuilder.Property(entity => entity.CreationDate).IsRequired();
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace LibraryQuotes.Services.Interfaces
 {
     public interface IQuoteListService
     {
-        ListCopiesEntity CalculatePriceListCopiesAndConvertToClientDTO(ClientListAndAmountDTO payload);
+        ListCopiesEntity CalculatePriceListCopiesAndConvertToClientDTO(ClientListAndAmountDTO payload, string idUser);
         ListCopiesEntity CalculatePriceListCopies(ClientDTO payload);
     }
 }

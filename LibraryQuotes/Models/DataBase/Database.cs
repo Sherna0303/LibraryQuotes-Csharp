@@ -8,6 +8,7 @@ namespace LibraryQuotes.Models.DataBase
     public class Database(DbContextOptions options) : DbContext(options), IDatabase
     {
         public DbSet<Copy> copy {  get; set; }
+        public DbSet<Users> users {  get; set; }
 
         public async Task<bool> SaveAsync()
         {
@@ -23,6 +24,7 @@ namespace LibraryQuotes.Models.DataBase
         private void EntityTypeConfiguration(ModelBuilder modelBuilder)
         {
             new CopyConfiguration(modelBuilder.Entity<Copy>());
+            new CopyConfiguration(modelBuilder.Entity<Users>());
         }
     }
 }

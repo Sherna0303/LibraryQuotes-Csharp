@@ -9,14 +9,16 @@ namespace LibraryQuotes.Services
     {
         private readonly ICopyFactory _copyFactory;
         private readonly IGetCopiesService _getCopiesService;
+        private readonly ICalculateSeniorityService _calculateSeniorityService;
 
-        public QuoteListService(ICopyFactory copyFactory, IGetCopiesService getCopiesService)
+        public QuoteListService(ICopyFactory copyFactory, IGetCopiesService getCopiesService, ICalculateSeniorityService calculateSeniorityService)
         {
             _copyFactory = copyFactory;
             _getCopiesService = getCopiesService;
+            _calculateSeniorityService = calculateSeniorityService;
         }
 
-        public ListCopiesEntity CalculatePriceListCopiesAndConvertToClientDTO(ClientListAndAmountDTO payload)
+        public ListCopiesEntity CalculatePriceListCopiesAndConvertToClientDTO(ClientListAndAmountDTO payload, string idUser)
         {
             var copiesDTO = _getCopiesService.GetCopiesByIdAndAmountAsync(payload).Result;
 
@@ -24,6 +26,8 @@ namespace LibraryQuotes.Services
             {
                 throw new ArgumentException("The copy id does not exist in the database");
             }
+
+            copiesDTO.AntiquityYears = _calculateSeniorityService.GetSeniority(idUser);
 
             return CalculatePriceListCopies(copiesDTO);
         }
@@ -69,5 +73,14 @@ namespace LibraryQuotes.Services
 
             return count > 1 && count <= 10 ? RETAIL_INCREASE : 1;
         }
+
+        private int CalculateAntiquityYears(DateOnly date)
+{
+    var today = DateTime.Now;
+    var JoinDate = new DateTime(date.Year, date.Month, date.Day);
+    TimeSpan totalDays = today - JoinDate;
+
+    return totalDays.Days / 365;
+}
     }
 }
